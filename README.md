@@ -1,4 +1,4 @@
-# Patas al Rescate · Sitio web de adopción
+# Happy Tails · Sitio web de adopción
 
 Sitio web de adopción responsable con:
 - catálogo filtrable,
