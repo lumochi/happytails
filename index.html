@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Patas al Rescate</title>
+<meta name="description" content="Adopta a un perrito rescatado: catálogo, fichas médicas y formulario de interés.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+<a class="sr-only" href="#perritos">Saltar al catálogo</a>
+<div id="modeBanner" class="mode-banner" hidden></div>
+
+<header class="header" id="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Ir al inicio">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-paw"/></svg></span>
+      <span style="min-width:0"><span class="brand-name" data-bind="nombre">Patas al Rescate</span><span class="brand-sub" data-bind="lema"></span></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#perritos">Perritos en adopción</a>
+      <a href="#como-adoptar">Cómo adoptar</a>
+      <a href="#nosotros">Sobre nosotros</a>
+      <a class="btn btn-primary cta-mobile" href="#perritos">Encuentra a tu compañero ideal</a>
+    </nav>
+    <a class="btn btn-primary cta-header" href="#perritos"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-heart"/></svg>Encuentra a tu compañero ideal</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="paws-decor" style="width:220px;height:220px;left:-40px;top:30px;transform:rotate(-20deg)" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-paw"/></svg></div>
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-paw"/></svg>Adopción responsable</span>
+        <h1>No busques una mascota perfecta, <em>encuentra un amigo</em> que te ame para siempre</h1>
+        <p class="hero-lead">Cada perrito de este albergue fue rescatado y hoy espera una familia. Adoptar le da una segunda oportunidad a quien más lo necesita y libera un espacio para rescatar a otro.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#perritos"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-paw"/></svg>Conocer a los perritos</a>
+          <a class="btn btn-ghost" href="#como-adoptar">Cómo es el proceso</a>
+        </div>
+        <div class="hero-facts">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-check"/></svg>Fichas con su última vacuna registrada</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-check"/></svg>Contacto directo con el albergue</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-blob" aria-hidden="true"></div><div class="hero-blob two" aria-hidden="true"></div>
+        <img class="hero-photo" id="heroPhoto" alt="" width="460" height="497">
+        <div class="hero-chip b"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-paw"/></svg></span><span><strong id="heroCount">—</strong>esperando un hogar</span></div>
+        <div class="hero-chip a"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-heart"/></svg></span><span id="heroChipName"><strong>Hola</strong>¿me llevas a casa?</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESTACADOS -->
+  <section class="section featured" id="destacados">
+    <div class="wrap">
+      <div class="featured-head">
+        <div class="section-head">
+          <span class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-heart"/></svg>Te están esperando</span>
+          <h2>Perritos destacados</h2>
+          <p>Algunos de los peluditos que hoy buscan familia. Conoce su historia y su ficha médica.</p>
+        </div>
+        <a class="btn btn-soft" href="#perritos">Ver todo el catálogo</a>
+      </div>
+      <div class="featured-row" id="featuredRow"></div>
+    </div>
+  </section>
+
+  <!-- IMPACTO -->
+  <section class="section impact" id="impacto">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-paw"/></svg>Nuestro impacto</span>
+        <h2>Cada adopción cuenta</h2>
+      </div>
+      <div class="stats" id="stats"></div>
+      <p class="impact-note" id="impactNote"></p>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO -->
+  <section class="section" id="perritos">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-paw"/></svg>Catálogo</span>
+        <h2>Perritos en adopción</h2>
+        <p>Filtra por tamaño, sexo, personalidad o estado y abre la ficha de cada uno para conocerlo mejor.</p>
+      </div>
+      <div class="catalog-tools">
+        <div class="toolbar">
+          <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <span class="sr-only">Buscar por nombre</span><input id="q" type="search" placeholder="Buscar por nombre…" autocomplete="off"></label>
+          <label><span class="sr-only">Ordenar</span>
+            <select id="sort" class="select">
+              <option value="orden">Orden del albergue</option>
+              <option value="az">Nombre (A–Z)</option>
+              <option value="za">Nombre (Z–A)</option>
+              <option value="peso-asc">Peso: menor a mayor</option>
+              <option value="peso-desc">Peso: mayor a menor</option>
+              <option value="recientes">Actualizados recientemente</option>
+            </select></label>
+          <button class="btn btn-ghost btn-sm filters-toggle" id="filtersToggle" aria-expanded="false" aria-controls="filters">Filtros</button>
+        </div>
+        <div class="filters" id="filters"></div>
+        <div class="results-bar"><span id="resultsCount" aria-live="polite"></span><button class="linkish" id="resetFilters" hidden>Limpiar filtros</button></div>
+      </div>
+      <div class="grid-cards" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- CÓMO ADOPTAR -->
+  <section class="section adopt" id="como-adoptar">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-paw"/></svg>Adopción responsable</span>
+        <h2>Cómo adoptar, paso a paso</h2>
+        <p>Adoptar es un compromiso de muchos años. Este proceso ayuda a que cada perrito llegue a un hogar preparado para él.</p>
+      </div>
+      <ol class="steps" style="list-style:none;padding:0;margin-top:0">
+        <li class="step"><span class="step-num">1</span><h3>Conócelo</h3><p>Revisa su ficha: personalidad, tamaño y estado de salud. Pregunta todo lo que necesites.</p></li>
+        <li class="step"><span class="step-num">2</span><h3>Cuéntanos de ti</h3><p>Completa el formulario de interés. Se genera un mensaje para que lo envíes por WhatsApp.</p></li>
+        <li class="step"><span class="step-num">3</span><h3>Conversación y visita</h3><p>El albergue te contacta para conversar y coordinar una visita para que se conozcan.</p></li>
+        <li class="step"><span class="step-num">4</span><h3>Hogar preparado</h3><p>Prepara su espacio, cama, comida y paseos. Todos en casa deben estar de acuerdo.</p></li>
+        <li class="step"><span class="step-num">5</span><h3>Adopción y seguimiento</h3><p>Firmas el compromiso de adopción y el albergue hace seguimiento de su adaptación.</p></li>
+      </ol>
+
+      <div class="form-wrap" id="formulario">
+        <div class="form-aside">
+          <h3>Formulario de interés</h3>
+          <p>Completa tus datos. Al final verás el mensaje listo para enviarlo tú mismo por WhatsApp al albergue: esta página no envía nada por su cuenta.</p>
+          <div id="pickedDog"></div>
+          <div id="waStatusNote"></div>
+        </div>
+        <form class="form" id="adoptForm" novalidate>
+          <div class="form-row">
+            <div class="field"><label for="f-nombre">Tu nombre <span class="req">*</span></label><input id="f-nombre" name="nombre" autocomplete="name" aria-describedby="e-nombre"><span class="error-msg" id="e-nombre"></span></div>
+            <div class="field"><label for="f-distrito">Distrito o ciudad <span class="req">*</span></label><input id="f-distrito" name="distrito" autocomplete="address-level2" aria-describedby="e-distrito"><span class="error-msg" id="e-distrito"></span></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="f-correo">Correo electrónico <span class="req">*</span></label><input id="f-correo" name="correo" type="email" autocomplete="email" aria-describedby="e-correo"><span class="error-msg" id="e-correo"></span></div>
+            <div class="field"><label for="f-telefono">Teléfono <span class="req">*</span></label><input id="f-telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="e-telefono"><span class="error-msg" id="e-telefono"></span></div>
+          </div>
+          <div class="field"><label for="f-perrito">Perrito que deseas adoptar <span class="req">*</span></label><select id="f-perrito" name="perrito" aria-describedby="e-perrito"></select><span class="error-msg" id="e-perrito"></span></div>
+          <div class="field"><label for="f-motivo">¿Por qué deseas adoptar? <span class="req">*</span></label><textarea id="f-motivo" name="motivo" aria-describedby="h-motivo e-motivo"></textarea><span class="hint" id="h-motivo">Mínimo 20 caracteres.</span><span class="error-msg" id="e-motivo"></span></div>
+          <div class="field"><label for="f-hogar">Tu hogar y experiencia con animales <span class="req">*</span></label><textarea id="f-hogar" name="hogar" aria-describedby="h-hogar e-hogar"></textarea><span class="hint" id="h-hogar">Ej.: casa o departamento, si tiene patio, quiénes viven contigo, otras mascotas, experiencia previa.</span><span class="error-msg" id="e-hogar"></span></div>
+          <label class="check"><input type="checkbox" id="f-compartir" checked> Incluir mi correo y teléfono en el mensaje de WhatsApp</label>
+          <div class="field"><label class="check"><input type="checkbox" id="f-compromiso" aria-describedby="e-compromiso"> <span>Entiendo que adoptar es un compromiso responsable de largo plazo: alimentación, salud, paseos, cariño y cuidado durante toda su vida. <span class="req">*</span></span></label><span class="error-msg" id="e-compromiso"></span></div>
+          <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-heart"/></svg>Preparar mi mensaje</button>
+          <div id="waResult" hidden></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE NOSOTROS -->
+  <section class="section about" id="nosotros">
+    <div class="wrap">
+      <div class="about-mosaic" id="aboutMosaic" aria-hidden="true"></div>
+      <div class="about-copy">
+        <span class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-paw"/></svg>Sobre nosotros</span>
+        <h2 data-bind="nombre">Patas al Rescate</h2>
+        <p data-bind="descripcion"></p>
+        <ul class="contact-list" id="contactList"></ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div><strong data-bind="nombre">Patas al Rescate</strong><p>Proyecto universitario de apoyo a la adopción responsable.</p></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn btn-ghost btn-sm" href="#inicio">Volver arriba</a>
+      <button class="btn btn-ghost btn-sm" id="adminOpen" hidden>Administrar</button>
+    </div>
+  </div>
+</footer>
+
+<div id="modalRoot"></div>
+<div id="adminRoot"></div>
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-paw" viewBox="0 0 24 24"><ellipse cx="6" cy="9.5" rx="2.1" ry="2.7"/><ellipse cx="10" cy="5.6" rx="2.1" ry="2.7"/><ellipse cx="14.4" cy="5.6" rx="2.1" ry="2.7"/><ellipse cx="18.3" cy="9.5" rx="2.1" ry="2.7"/><path d="M12.2 11c-2.6 0-6 3.4-6 6.2 0 1.9 1.4 2.8 3 2.8 1.3 0 2-.7 3-.7s1.7.7 3 .7c1.6 0 3-.9 3-2.8 0-2.8-3.4-6.2-6-6.2z"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.5 6.6 4.5c2.1 0 3.6 1.2 5.4 3.2 1.8-2 3.3-3.2 5.4-3.2 3.6 0 5.7 3.7 4.2 7.2C19.5 16.4 12 21 12 21z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-weight" viewBox="0 0 24 24"><path d="M6.5 8h11l2 12h-15z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="5.5" r="2.2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M3 15 15 3l6 6L9 21z M7 13l2 2 M10 10l2 2 M13 7l2 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-cake" viewBox="0 0 24 24"><path d="M4 21h16M5 21v-7h14v7M8 14v-3M12 14v-3M16 14v-3M12 7.5c-1 0-1.5-.8-1.5-1.5S12 3 12 3s1.5 2.3 1.5 3-.5 1.5-1.5 1.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-syringe" viewBox="0 0 24 24"><path d="m18 2 4 4M16 4l4 4M14.5 5.5l4 4L9 19H5v-4zM11 9l1.5 1.5M8.5 11.5 10 13M2 22l3-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 14.5s1.2 2 3.5 2 3.5-2 3.5-2M9 9.5h.01M15 9.5h.01" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v5M12 8h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 19.5 5.3 16A8 8 0 1 1 8 18.7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="13.5" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 7l1.5-3h3L15 7" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+</svg>
+
+<script src="js/config.js"></script>
+<script src="data/perritos.js"></script>
+<script src="js/almacenamiento.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

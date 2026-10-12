@@ -1,0 +1,781 @@
+/* Registros iniciales extraídos de los 18 afiches del ZIP. Edítalos desde el panel de administración
+   o directamente aquí (ver README). Campos vacíos ("") = información pendiente de confirmar. */
+window.DATOS_INICIALES = {
+ "perritos": [
+  {
+   "id": "bruno",
+   "nombre": "Bruno",
+   "especie": "Perro",
+   "sexo": "Macho",
+   "pesoKg": 7.0,
+   "tamano": "Mediano",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Tranquilo"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sano y tranquilo.",
+   "medica": {
+    "ultimaVacuna": "Septiembre 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/bruno.jpg",
+    "fotos/afiches/bruno.jpg"
+   ],
+   "archivoOriginal": "bruno.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [],
+   "orden": 1
+  },
+  {
+   "id": "canela",
+   "nombre": "Canela",
+   "especie": "Perro",
+   "sexo": "Hembra",
+   "pesoKg": 11.8,
+   "tamano": "Mediano",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Noble"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sana y muy noble.",
+   "medica": {
+    "ultimaVacuna": "Agosto 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": true,
+   "fotos": [
+    "fotos/canela.jpg",
+    "fotos/afiches/canela.jpg"
+   ],
+   "archivoOriginal": "canela.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [],
+   "orden": 2
+  },
+  {
+   "id": "canelo",
+   "nombre": "Canelo",
+   "especie": "Perro",
+   "sexo": "Macho",
+   "pesoKg": 9.7,
+   "tamano": "Mediano",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Noble"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sano y muy noble.",
+   "medica": {
+    "ultimaVacuna": "Septiembre 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/canelo.jpg",
+    "fotos/afiches/canelo.jpg"
+   ],
+   "archivoOriginal": "canelo.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [],
+   "orden": 3
+  },
+  {
+   "id": "chispa",
+   "nombre": "Chispa",
+   "especie": "Perro",
+   "sexo": "Hembra",
+   "pesoKg": 9.2,
+   "tamano": "Mediano",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Noble"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sano y muy noble.",
+   "medica": {
+    "ultimaVacuna": "Agosto 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/chispa.jpg",
+    "fotos/afiches/chispa.jpg"
+   ],
+   "archivoOriginal": "chispa.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [
+    "El afiche dice «sano» aunque Chispa es hembra; probablemente es un error de redacción."
+   ],
+   "orden": 4
+  },
+  {
+   "id": "copito",
+   "nombre": "Copito",
+   "especie": "Perro",
+   "sexo": "Macho",
+   "pesoKg": 6.1,
+   "tamano": "Pequeño",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Cariñoso"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sano y cariñoso.",
+   "medica": {
+    "ultimaVacuna": "Septiembre 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": true,
+   "fotos": [
+    "fotos/copito.jpg",
+    "fotos/afiches/copito.jpg"
+   ],
+   "archivoOriginal": "copito.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [],
+   "orden": 5
+  },
+  {
+   "id": "luna",
+   "nombre": "Luna",
+   "especie": "Gato",
+   "sexo": "Hembra",
+   "pesoKg": 3.6,
+   "tamano": "Mediano",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Dulce"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sana y dulce.",
+   "medica": {
+    "ultimaVacuna": "Agosto 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/luna.jpg",
+    "fotos/afiches/luna.jpg"
+   ],
+   "archivoOriginal": "luna.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [
+    "Luna es una gata (se ve en la foto de su afiche). El afiche indica tamaño «Mediana» con 3.6 kg; confirmar."
+   ],
+   "orden": 6
+  },
+  {
+   "id": "lupita",
+   "nombre": "Lupita",
+   "especie": "Perro",
+   "sexo": "Hembra",
+   "pesoKg": 5.0,
+   "tamano": "Pequeño",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Dulce"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sana y dulce.",
+   "medica": {
+    "ultimaVacuna": "Septiembre 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/lupita.jpg",
+    "fotos/afiches/lupita.jpg"
+   ],
+   "archivoOriginal": "lupita.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [],
+   "orden": 7
+  },
+  {
+   "id": "miel",
+   "nombre": "Miel",
+   "especie": "Perro",
+   "sexo": "Hembra",
+   "pesoKg": 5.8,
+   "tamano": "Pequeño",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Llena de energía"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sana y llena de energía.",
+   "medica": {
+    "ultimaVacuna": "Agosto 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/miel.jpg",
+    "fotos/afiches/miel.jpg"
+   ],
+   "archivoOriginal": "miel.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [],
+   "orden": 8
+  },
+  {
+   "id": "milo",
+   "nombre": "Milo",
+   "especie": "Perro",
+   "sexo": "Macho",
+   "pesoKg": 6.1,
+   "tamano": "Pequeño",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Juguetón"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sano y muy juguetón.",
+   "medica": {
+    "ultimaVacuna": "Julio 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": true,
+   "fotos": [
+    "fotos/milo.jpg",
+    "fotos/afiches/milo.jpg"
+   ],
+   "archivoOriginal": "milo.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [],
+   "orden": 9
+  },
+  {
+   "id": "mota",
+   "nombre": "Mota",
+   "especie": "Perro",
+   "sexo": "Hembra",
+   "pesoKg": 6.7,
+   "tamano": "Pequeño",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Cariñoso"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sana y cariñosa.",
+   "medica": {
+    "ultimaVacuna": "Agosto 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/motal.jpg",
+    "fotos/afiches/motal.jpg"
+   ],
+   "archivoOriginal": "motal.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [
+    "El archivo original se llama «motal.jpg», pero el afiche dice «MOTA». Se usa Mota; confirmar el nombre."
+   ],
+   "orden": 10
+  },
+  {
+   "id": "nube",
+   "nombre": "Nube",
+   "especie": "Perro",
+   "sexo": "Hembra",
+   "pesoKg": 6.2,
+   "tamano": "Pequeño",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Amoroso"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sana y amorosa.",
+   "medica": {
+    "ultimaVacuna": "Agosto 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/nube.jpg",
+    "fotos/afiches/nube.jpg"
+   ],
+   "archivoOriginal": "nube.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [],
+   "orden": 11
+  },
+  {
+   "id": "oreo",
+   "nombre": "Oreo",
+   "especie": "Perro",
+   "sexo": "Macho",
+   "pesoKg": 11.2,
+   "tamano": "Mediano",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Cariñoso"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sano y cariñoso.",
+   "medica": {
+    "ultimaVacuna": "Septiembre 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": true,
+   "fotos": [
+    "fotos/oreo.jpg",
+    "fotos/afiches/oreo.jpg"
+   ],
+   "archivoOriginal": "oreo.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [],
+   "orden": 12
+  },
+  {
+   "id": "panda",
+   "nombre": "Panda",
+   "especie": "Perro",
+   "sexo": "Macho",
+   "pesoKg": 5.4,
+   "tamano": "Pequeño",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Juguetón"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sano y juguetón.",
+   "medica": {
+    "ultimaVacuna": "Septiembre 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": true,
+   "fotos": [
+    "fotos/panda.jpg",
+    "fotos/afiches/panda.jpg"
+   ],
+   "archivoOriginal": "panda.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [],
+   "orden": 13
+  },
+  {
+   "id": "pecas",
+   "nombre": "Pecas",
+   "especie": "Perro",
+   "sexo": "Hembra",
+   "pesoKg": 4.9,
+   "tamano": "Pequeño",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Dulce"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sana y muy dulce.",
+   "medica": {
+    "ultimaVacuna": "Septiembre 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/pecas.jpg",
+    "fotos/afiches/pecas.jpg"
+   ],
+   "archivoOriginal": "pecas.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [],
+   "orden": 14
+  },
+  {
+   "id": "pelusa",
+   "nombre": "Pelusa",
+   "especie": "Perro",
+   "sexo": "Hembra",
+   "pesoKg": 8.3,
+   "tamano": "Mediano",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Cariñoso"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sana y cariñosa.",
+   "medica": {
+    "ultimaVacuna": "Agosto 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/pelusa.jpg",
+    "fotos/afiches/pelusa.jpg"
+   ],
+   "archivoOriginal": "pelusa.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [],
+   "orden": 15
+  },
+  {
+   "id": "toffee",
+   "nombre": "Toffee",
+   "especie": "Perro",
+   "sexo": "Macho",
+   "pesoKg": 5.6,
+   "tamano": "Pequeño",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Juguetón"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sano y juguetón.",
+   "medica": {
+    "ultimaVacuna": "Septiembre 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/toffee.jpg",
+    "fotos/afiches/toffee.jpg"
+   ],
+   "archivoOriginal": "toffee.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [],
+   "orden": 16
+  },
+  {
+   "id": "trufa",
+   "nombre": "Trufa",
+   "especie": "Perro",
+   "sexo": "Hembra",
+   "pesoKg": 7.4,
+   "tamano": "Mediano",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Lista para una familia"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sana y lista para una familia.",
+   "medica": {
+    "ultimaVacuna": "Septiembre 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": true,
+   "fotos": [
+    "fotos/trufa.jpg",
+    "fotos/afiches/trufa.jpg"
+   ],
+   "archivoOriginal": "trufa.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [],
+   "orden": 17
+  },
+  {
+   "id": "vainilla",
+   "nombre": "Vainilla",
+   "especie": "Perro",
+   "sexo": "Hembra",
+   "pesoKg": 8.1,
+   "tamano": "Mediano",
+   "edad": "",
+   "etapa": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [
+    "Tranquilo"
+   ],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "",
+   "cuidados": "",
+   "saludAfiche": "Está muy bien, sana y tranquila.",
+   "medica": {
+    "ultimaVacuna": "Septiembre 2026",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/vainilla.jpg",
+    "fotos/afiches/vainilla.jpg"
+   ],
+   "archivoOriginal": "vainilla.jpg",
+   "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
+   "notas": [],
+   "orden": 18
+  }
+ ],
+ "config": {
+  "nombre": "Patas al Rescate",
+  "lema": "Albergue de perritos · nombre provisional, editable",
+  "descripcion": "Proyecto universitario de apoyo a un albergue de perritos rescatados. Buscamos familias responsables que les den un hogar para siempre.",
+  "whatsapp": "",
+  "instagram": "",
+  "correo": "",
+  "ubicacion": "",
+  "horario": "",
+  "heroFoto": "fotos/copito.jpg",
+  "stats": [
+   {
+    "id": "disponibles",
+    "etiqueta": "Perritos disponibles",
+    "valor": null,
+    "auto": true
+   },
+   {
+    "id": "adopciones",
+    "etiqueta": "Adopciones realizadas",
+    "valor": null,
+    "auto": false
+   },
+   {
+    "id": "ayuda",
+    "etiqueta": "Animales que necesitan ayuda",
+    "valor": null,
+    "auto": false
+   }
+  ]
+ }
+};
