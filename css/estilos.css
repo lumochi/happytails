@@ -567,6 +567,9 @@ textarea.code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size
 .don-medio small { color: var(--muted); font-size: 12.5px; }
 .don-medio .btn { justify-self: start; }
 .wa-result .don-medio { margin: 10px 0; }
+.don-qr { display: grid; justify-items: center; gap: 6px; text-align: center; }
+.don-qr img { width: 100%; max-width: 200px; aspect-ratio: 1; object-fit: contain; background: #fff; border-radius: 12px; padding: 6px; }
+.don-qr-admin { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
 .don-pay dd { margin: 0; display: flex; justify-content: space-between; gap: 8px; font-weight: 700; min-width: 0; word-break: break-all; }
 .don-needs { background: var(--bg); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 20px; display: grid; gap: 10px; }
 .don-needs h3 { font-size: 19px; }

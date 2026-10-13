@@ -24,18 +24,20 @@
 
   const linkSeguro = (u) => /^https:\/\/[^\s"'<>]+$/i.test(String(u || "").trim()) ? String(u).trim() : "";
   const MEDIOS = [
-    { id: "yape", e: "💜", t: "Yape", listo: (d) => !!d.yape, filas: (d) => [["Número", d.yape], ["A nombre de", d.titular]] },
-    { id: "plin", e: "💙", t: "Plin", listo: (d) => !!d.plin, filas: (d) => [["Número", d.plin], ["A nombre de", d.titular]] },
+    { id: "yape", e: "💜", t: "Yape", qr: "yapeQR", listo: (d) => !!(d.yape || d.yapeQR), filas: (d) => [["Número", d.yape], ["A nombre de", d.titular]] },
+    { id: "plin", e: "💙", t: "Plin", qr: "plinQR", listo: (d) => !!(d.plin || d.plinQR), filas: (d) => [["Número", d.plin], ["A nombre de", d.titular]] },
     { id: "transferencia", e: "🏦", t: "Transferencia bancaria", listo: (d) => !!(d.cuenta || d.cci), filas: (d) => [["Banco", d.banco], ["Cuenta", d.cuenta], ["CCI", d.cci], ["Titular", d.titular]] },
     { id: "tarjeta", e: "💳", t: "Tarjeta de débito o crédito", listo: (d) => !!linkSeguro(d.linkTarjeta), filas: () => [] },
   ];
+  function activos(d) { return MEDIOS.filter((m) => m.listo(d)); }
+  function mediosForm(d) { const a = activos(d); return a.length ? a : MEDIOS; }
   function medioHTML(m, d) { return `<div class="don-medio${m.listo(d) ? "" : " off"}"><strong>${m.e} ${m.t}</strong>${medioCuerpo(m, d)}</div>`; }
   function medioCuerpo(m, d) {
     const listo = m.listo(d);
     let cuerpo;
     if (!listo) cuerpo = `<p class="don-k">${PEND}</p>`;
     else if (m.id === "tarjeta") cuerpo =`<a class="btn btn-soft btn-sm" href="${esc(linkSeguro(d.linkTarjeta))}" target="_blank" rel="noopener">Pagar con tarjeta ↗</a><small class="don-k">Se abre la pasarela de pago segura del albergue. Esta página no ve ni guarda los datos de tu tarjeta.</small>`;
-    else cuerpo = `<dl class="don-pay">${m.filas(d).filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd><span>${esc(v)}</span>${k === "Titular" || k === "A nombre de" || k === "Banco" ? "" : `<button class="linkish" data-copy="${esc(v)}">Copiar</button>`}</dd></div>`).join("")}</dl>`;
+    else cuerpo = (m.qr && d[m.qr] ? `<div class="don-qr"><img src="${esc(window.HT.foto(d[m.qr]))}" alt="Código QR de ${m.t} del albergue" loading="lazy"><small>Escanéalo desde la app ${m.t} (Escanear QR). Si estás en el celular, usa el número o sube una captura del QR desde la opción de galería de la app.</small></div>` : "") + `<dl class="don-pay">${m.filas(d).filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd><span>${esc(v)}</span>${k === "Titular" || k === "A nombre de" || k === "Banco" ? "" : `<button class="linkish" data-copy="${esc(v)}">Copiar</button>`}</dd></div>`).join("")}</dl>`;
     return cuerpo;
   }
 
@@ -48,6 +50,7 @@
   function render() {
     const root = $("#donaRoot"); if (!root || !window.HT) return;
     const d = D(), c = window.HT.cfg();
+    if (!mediosForm(d).some((m) => m.id === form.medio)) form.medio = mediosForm(d)[0].id;
     const necesidades = (d.necesidades || []).filter(Boolean);
     const movs = (d.movimientos || []).slice().sort((a, b) => String(b.fecha).localeCompare(String(a.fecha)));
     const t = totales(movs), usos = movs.filter((m) => m.tipo === "uso");
@@ -61,8 +64,9 @@
           <p>Entrégalo directamente en el albergue. Te registramos para que sepas en qué se usó.</p>
           <p class="don-k">Coordina tu visita por WhatsApp${c.whatsapp ? `: <strong>+${esc(c.whatsapp)}</strong>` : ""}.</p></article>
         <article class="don-way"><span class="don-e">📱</span><h3>Dona en línea</h3>
-          <p>Elige el medio que prefieras:</p>
-          <div class="don-medios">${MEDIOS.map((m) => medioHTML(m, d)).join("")}</div></article>
+          ${activos(d).length ? `<p>${activos(d).length > 1 ? "Elige el medio que prefieras:" : "Aporta en segundos:"}</p>
+          <div class="don-medios">${activos(d).map((m) => medioHTML(m, d)).join("")}</div>`
+            : `<p class="don-k">${PEND}: el albergue aún no registra su Yape, Plin u otro medio de pago en línea.</p>`}</article>
       </div>
       ${necesidades.length ? `<div class="don-needs"><h3>Lo que más necesitamos</h3><div class="tags">${necesidades.map((n) => { const urg = /^!|urgente/i.test(n); return `<span class="tag ${urg ? "warn" : "sage"}">${urg ? "⚠️ " : ""}${esc(n.replace(/^!\s*/, ""))}</span>`; }).join("")}</div></div>` : ""}
       <div class="don-grid">
@@ -70,7 +74,7 @@
           <h3 style="font-size:24px">Registra tu donación</h3>
           <p class="hint" style="color:var(--muted)">Déjanos tus datos y te iremos contando cómo se usa tu aporte, por el medio que prefieras.</p>
           <div class="field"><span class="label">¿Cómo vas a donar?</span><div class="chips">${[["linea", "En línea"], ["persona", "Dinero en persona"], ["especie", "Comida o insumos"]].map(([v, l]) => `<button type="button" class="chip" data-dtipo="${v}" aria-pressed="${form.tipo === v}">${l}</button>`).join("")}</div></div>
-          ${form.tipo === "linea" ? `<div class="field"><span class="label">¿Por qué medio?</span><div class="chips">${MEDIOS.map((m) => `<button type="button" class="chip" data-dmedio="${m.id}" aria-pressed="${form.medio === m.id}">${m.e} ${m.id === "tarjeta" ? "Tarjeta" : m.id === "transferencia" ? "Transferencia" : m.t}</button>`).join("")}</div></div>` : ""}
+          ${form.tipo === "linea" ? `<div class="field"><span class="label">¿Por qué medio?</span><div class="chips">${mediosForm(d).map((m) => `<button type="button" class="chip" data-dmedio="${m.id}" aria-pressed="${form.medio === m.id}">${m.e} ${m.id === "tarjeta" ? "Tarjeta" : m.id === "transferencia" ? "Transferencia" : m.t}</button>`).join("")}</div></div>` : ""}
           <div class="form-row">
             <div class="field"><label for="dn-nombre">Tu nombre <span class="req">*</span></label><input id="dn-nombre" autocomplete="name"><span class="error-msg" id="dn-e-nombre"></span></div>
             <div class="field"><label for="dn-monto">${form.tipo === "especie" ? "¿Qué vas a llevar?" : "Monto (S/)"} <span class="req">*</span></label><input id="dn-monto" ${form.tipo === "especie" ? 'placeholder="Ej.: 2 sacos de comida"' : 'inputmode="decimal" placeholder="Ej.: 50"'}><span class="error-msg" id="dn-e-monto"></span></div>
@@ -174,6 +178,9 @@
         <p class="hint" style="color:var(--muted)">Se muestran en la sección pública “Dona”. Deja vacío lo que no uses. El lugar y horario de entrega se toman de “Albergue y contacto”.</p>
         <div class="grid-3">${fld("Yape (número)", inp("yape", d.yape, 'inputmode="tel"'))}${fld("Plin (número)", inp("plin", d.plin, 'inputmode="tel"'))}${fld("Banco", inp("banco", d.banco, 'placeholder="Ej.: BCP"'))}
           ${fld("N.º de cuenta", inp("cuenta", d.cuenta))}${fld("CCI", inp("cci", d.cci))}${fld("Titular (nombre que aparece en Yape/Plin/cuenta)", inp("titular", d.titular))}</div>
+        <div class="don-qr-admin">${[["yapeQR", "Yape"], ["plinQR", "Plin"]].map(([k, t]) => `<div class="field"><span class="label">QR de ${t} (opcional)</span>
+          ${d[k] ? `<div class="don-qr"><img src="${esc(window.HT.foto(d[k]))}" alt="QR de ${t}"><button type="button" class="btn btn-danger btn-sm" data-d="qr-del" data-id="${k}">Quitar QR</button></div>`
+            : `<label class="upload-box" style="min-height:90px">${AD.subiendo === k ? "Subiendo…" : `+ Subir QR de ${t}<br><small>Captura de tu app ${t} → “Mi QR”</small>`}<input type="file" accept="image/*" class="sr-only" data-qr="${k}"></label>`}</div>`).join("")}</div>
         ${fld("Link de pago con tarjeta (opcional)", inp("linkTarjeta", d.linkTarjeta, 'type="url" placeholder="https://… (link de pago de Mercado Pago, Izipay, Niubiz, etc.)"'), "Crea un “link de pago” en tu pasarela y pégalo aquí. Debe empezar con https://. Si lo dejas vacío, la opción Tarjeta aparece como pendiente.")}
         <span class="error-msg" id="donCfgError"></span>
         ${fld("Lo que más necesitamos (uno por línea; empieza con ! para marcar urgente)", `<textarea name="necesidades" placeholder="!Comida para cachorros&#10;Mantas&#10;Desinfectante">${esc((d.necesidades || []).join("\n"))}</textarea>`)}
@@ -242,11 +249,24 @@
     if (a === "mov-del" || a === "don-del") { AD.confirmar = id; return window.HT.renderAdmin(); }
     if (a === "mov-del-si") { AD.confirmar = null; return guardarDon({ movimientos: (D().movimientos || []).filter((m) => m.id !== id) }, "Movimiento eliminado."); }
     if (a === "don-del-si") { AD.confirmar = null; await window.HT.ejecutar(() => window.HT.store().eliminarDonante(id), "Donante eliminado."); AD.donantes = (AD.donantes || []).filter((r) => String(r.id) !== String(id)); return window.HT.renderAdmin(); }
+    if (a === "qr-del") return guardarDon({ [id]: "" }, "QR quitado. Recuerda que el donante aún puede usar tu número.");
     if (a === "recargar") { AD.donantes = null; return cargarDonantes(); }
     if (a === "copiar") { const r = donantePorId(id); if (r) { window.HT.copiar(mensajeActualizacion(r.datos)); actualizarDonante(id, { ultimaActualizacion: hoy() }); } return; }
     if (a === "enviado") { setTimeout(() => actualizarDonante(id, { ultimaActualizacion: hoy() }, "Marcado como actualizado hoy."), 300); }
   });
-  document.addEventListener("change", (e) => {
+  document.addEventListener("change", async (e) => {
+    const q = e.target.closest("#adminRoot input[data-qr]");
+    if (q && q.files && q.files[0]) {
+      const k = q.dataset.qr, file = q.files[0];
+      if (!/^image\//.test(file.type)) { window.HT.toast("Elige una imagen (captura del QR)."); return; }
+      const f = $("#donCfgForm"), g = (n) => f.elements[n].value.trim();
+      const tecleado = { yape: g("yape"), plin: g("plin"), banco: g("banco"), cuenta: g("cuenta"), cci: g("cci"), titular: g("titular") };
+      AD.subiendo = k; window.HT.renderAdmin();
+      let url = ""; await window.HT.ejecutar(async () => { url = await window.HT.store().subirFoto(file); });
+      AD.subiendo = null;
+      if (url) return guardarDon(Object.assign(tecleado, { [k]: url }), "QR guardado. Ya aparece en la sección Dona.");
+      return window.HT.renderAdmin();
+    }
     const s = e.target.closest("#adminRoot select[data-d='estado']"); if (s) actualizarDonante(s.dataset.id, { estado: s.value }, "Estado actualizado.");
   });
   document.addEventListener("submit", (e) => {
