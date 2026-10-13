@@ -1,21 +1,15 @@
 /* ==========================================================
    CONFIGURACIÓN DEL SITIO
    ----------------------------------------------------------
-   Base de datos compartida (opcional): Supabase.
-   Déjalo vacío para usar el modo local (solo este navegador).
-   Pasos completos en README.md → "Activar Supabase".
-
-   - url:      Project URL  (Supabase → Project Settings → API)
-   - anonKey:  anon / publishable key. Es pública por diseño; la
-               seguridad la dan las políticas RLS del README.
-   NUNCA pegues aquí la "service_role" ni contraseñas.
-
-   El número de WhatsApp, nombre del albergue y contacto NO se
-   editan aquí: se cambian desde el Panel de administración.
+   Base de datos compartida: Supabase (proyecto HappyTails).
+   - url:      Project URL
+   - anonKey:  publishable key. Es pública por diseño; la
+               seguridad la dan las políticas RLS (supabase/esquema.sql).
+   NUNCA pegues aquí la "secret key", la "service_role" ni contraseñas.
    ========================================================== */
 window.CONFIG_SITIO = {
   supabase: {
-    url: "",
-    anonKey: ""
+    url: "https://tkdfdqyxopfjmirggcwm.supabase.co",
+    anonKey: "sb_publishable_1Qwv4UvqfjreimaaEUGhRw_09JXoZ7R"
   }
 };

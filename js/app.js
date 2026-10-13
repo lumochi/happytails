@@ -408,7 +408,7 @@
   }
   function vistaLogin() {
     return `<form class="panel login" id="loginForm"><h3>Iniciar sesión</h3><p style="color:var(--muted)">Usa el correo y la contraseña del administrador creado en Supabase (ver README). La contraseña no se guarda en esta página.</p>
-      ${fld("Correo", inp("email", "", 'type="email" autocomplete="username" required'))}${fld("Contraseña", '<input name="pass" type="password" autocomplete="current-password" required>')}
+      ${fld("Correo", inp("email", A.loginEmail || "", 'type="email" autocomplete="username" required'))}${fld("Contraseña", '<input name="pass" type="password" autocomplete="current-password" required>')}
       <button class="btn btn-primary" type="submit">Entrar</button></form>`;
   }
   function vistaTab() {
@@ -596,7 +596,7 @@
   $("#adminRoot").addEventListener("input", (e) => { if (e.target.id === "admFiltro") { A.filtro = e.target.value; const pos = e.target.selectionStart; renderAdmin(); const n = $("#admFiltro"); n.focus(); n.setSelectionRange(pos, pos); } });
   $("#adminRoot").addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (e.target.id === "loginForm") { const f = e.target; return ejecutar(() => store.login(f.elements.email.value.trim(), f.elements.pass.value), "Sesión iniciada."); }
+    if (e.target.id === "loginForm") { const f = e.target; A.loginEmail = f.elements.email.value.trim(); return ejecutar(() => store.login(f.elements.email.value.trim(), f.elements.pass.value), "Sesión iniciada."); }
     if (e.target.id === "dogForm") {
       sincronizarBorrador(); const d = A.borrador;
       if (!d.nombre) { $("#dogFormError").textContent = "El nombre es obligatorio."; e.target.elements.nombre.focus(); return; }

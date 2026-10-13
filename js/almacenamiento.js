@@ -130,6 +130,12 @@
         const ps = comprobar(await sb.from("perritos").select("id, datos"));
         const cs = comprobar(await sb.from("sitio").select("datos").eq("id", "config").maybeSingle());
         const perritos = ps.map((r) => Object.assign({}, r.datos, { id: r.id }));
+        if (perritos.length === 0 && !cs) {
+          // Base aún vacía: se muestran los registros iniciales (sin guardar) hasta que el administrador los cargue.
+          const ini = iniciales();
+          alCambiar({ perritos: ini.perritos, config: ini.config, vacio: true });
+          return;
+        }
         alCambiar({ perritos, config: cs ? cs.datos : null, vacio: perritos.length === 0 && !cs });
       } catch (e) { alCambiar(null, "No se pudo leer Supabase: " + e.message); }
     }
