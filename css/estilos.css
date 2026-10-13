@@ -558,6 +558,15 @@ textarea.code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size
 .don-pay { margin: 0; display: grid; gap: 6px; }
 .don-pay div { display: grid; grid-template-columns: 64px 1fr; gap: 8px; align-items: center; background: var(--surface); border-radius: 10px; padding: 6px 10px; }
 .don-pay dt { font-size: 12px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.don-pay div { grid-template-columns: 86px 1fr; }
+.don-medios { display: grid; gap: 8px; }
+.don-medio { display: grid; gap: 6px; border: 1px solid var(--line, rgba(0,0,0,.08)); border-radius: 12px; padding: 10px 12px; background: var(--surface); min-width: 0; }
+.don-medio > strong { font-size: 15px; }
+.don-medio.off { opacity: .75; }
+.don-medio .don-pay div { background: var(--bg); }
+.don-medio small { color: var(--muted); font-size: 12.5px; }
+.don-medio .btn { justify-self: start; }
+.wa-result .don-medio { margin: 10px 0; }
 .don-pay dd { margin: 0; display: flex; justify-content: space-between; gap: 8px; font-weight: 700; min-width: 0; word-break: break-all; }
 .don-needs { background: var(--bg); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 20px; display: grid; gap: 10px; }
 .don-needs h3 { font-size: 19px; }
@@ -580,3 +589,6 @@ textarea.code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size
 @media (max-width: 1000px) { .mov-form { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 820px) { .don-grid { grid-template-columns: 1fr; } }
 @media (max-width: 420px) { .don-totals { grid-template-columns: 1fr; } .don-timeline li { grid-template-columns: 1fr; } }
+.don-pay dd { word-break: normal; }
+.don-pay dd span { min-width: 0; overflow-wrap: anywhere; }
+.don-pay dd button { flex: none; white-space: nowrap; }

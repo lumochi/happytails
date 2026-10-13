@@ -20,7 +20,24 @@
   const PEND = '<span class="pending">Pendiente de configurar</span>';
 
   /* ---------------- Sección pública ---------------- */
-  let form = { tipo: "linea", canal: "whatsapp" };
+  let form = { tipo: "linea", canal: "whatsapp", medio: "yape" };
+
+  const linkSeguro = (u) => /^https:\/\/[^\s"'<>]+$/i.test(String(u || "").trim()) ? String(u).trim() : "";
+  const MEDIOS = [
+    { id: "yape", e: "💜", t: "Yape", listo: (d) => !!d.yape, filas: (d) => [["Número", d.yape], ["A nombre de", d.titular]] },
+    { id: "plin", e: "💙", t: "Plin", listo: (d) => !!d.plin, filas: (d) => [["Número", d.plin], ["A nombre de", d.titular]] },
+    { id: "transferencia", e: "🏦", t: "Transferencia bancaria", listo: (d) => !!(d.cuenta || d.cci), filas: (d) => [["Banco", d.banco], ["Cuenta", d.cuenta], ["CCI", d.cci], ["Titular", d.titular]] },
+    { id: "tarjeta", e: "💳", t: "Tarjeta de débito o crédito", listo: (d) => !!linkSeguro(d.linkTarjeta), filas: () => [] },
+  ];
+  function medioHTML(m, d) { return `<div class="don-medio${m.listo(d) ? "" : " off"}"><strong>${m.e} ${m.t}</strong>${medioCuerpo(m, d)}</div>`; }
+  function medioCuerpo(m, d) {
+    const listo = m.listo(d);
+    let cuerpo;
+    if (!listo) cuerpo = `<p class="don-k">${PEND}</p>`;
+    else if (m.id === "tarjeta") cuerpo =`<a class="btn btn-soft btn-sm" href="${esc(linkSeguro(d.linkTarjeta))}" target="_blank" rel="noopener">Pagar con tarjeta ↗</a><small class="don-k">Se abre la pasarela de pago segura del albergue. Esta página no ve ni guarda los datos de tu tarjeta.</small>`;
+    else cuerpo = `<dl class="don-pay">${m.filas(d).filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd><span>${esc(v)}</span>${k === "Titular" || k === "A nombre de" || k === "Banco" ? "" : `<button class="linkish" data-copy="${esc(v)}">Copiar</button>`}</dd></div>`).join("")}</dl>`;
+    return cuerpo;
+  }
 
   function totales(movs) {
     const ing = movs.filter((m) => m.tipo === "ingreso").reduce((a, m) => a + (+m.monto || 0), 0);
@@ -34,11 +51,6 @@
     const necesidades = (d.necesidades || []).filter(Boolean);
     const movs = (d.movimientos || []).slice().sort((a, b) => String(b.fecha).localeCompare(String(a.fecha)));
     const t = totales(movs), usos = movs.filter((m) => m.tipo === "uso");
-    const lineaPago = [
-      ["Yape", d.yape], ["Plin", d.plin],
-      ["Banco", d.banco], ["Cuenta", d.cuenta], ["CCI", d.cci], ["Titular", d.titular],
-    ];
-    const hayPago = lineaPago.some(([, v]) => v);
     root.innerHTML = `
       <div class="don-ways">
         <article class="don-way"><span class="don-e">🥫</span><h3>Lleva comida o insumos</h3>
@@ -49,8 +61,8 @@
           <p>Entrégalo directamente en el albergue. Te registramos para que sepas en qué se usó.</p>
           <p class="don-k">Coordina tu visita por WhatsApp${c.whatsapp ? `: <strong>+${esc(c.whatsapp)}</strong>` : ""}.</p></article>
         <article class="don-way"><span class="don-e">📱</span><h3>Dona en línea</h3>
-          ${hayPago ? `<dl class="don-pay">${lineaPago.filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd><span>${esc(v)}</span><button class="linkish" data-copy="${esc(v)}">Copiar</button></dd></div>`).join("")}</dl>`
-            : `<p>${PEND}: el albergue aún no ha registrado sus datos de Yape, Plin o cuenta bancaria.</p>`}</article>
+          <p>Elige el medio que prefieras:</p>
+          <div class="don-medios">${MEDIOS.map((m) => medioHTML(m, d)).join("")}</div></article>
       </div>
       ${necesidades.length ? `<div class="don-needs"><h3>Lo que más necesitamos</h3><div class="tags">${necesidades.map((n) => { const urg = /^!|urgente/i.test(n); return `<span class="tag ${urg ? "warn" : "sage"}">${urg ? "⚠️ " : ""}${esc(n.replace(/^!\s*/, ""))}</span>`; }).join("")}</div></div>` : ""}
       <div class="don-grid">
@@ -58,6 +70,7 @@
           <h3 style="font-size:24px">Registra tu donación</h3>
           <p class="hint" style="color:var(--muted)">Déjanos tus datos y te iremos contando cómo se usa tu aporte, por el medio que prefieras.</p>
           <div class="field"><span class="label">¿Cómo vas a donar?</span><div class="chips">${[["linea", "En línea"], ["persona", "Dinero en persona"], ["especie", "Comida o insumos"]].map(([v, l]) => `<button type="button" class="chip" data-dtipo="${v}" aria-pressed="${form.tipo === v}">${l}</button>`).join("")}</div></div>
+          ${form.tipo === "linea" ? `<div class="field"><span class="label">¿Por qué medio?</span><div class="chips">${MEDIOS.map((m) => `<button type="button" class="chip" data-dmedio="${m.id}" aria-pressed="${form.medio === m.id}">${m.e} ${m.id === "tarjeta" ? "Tarjeta" : m.id === "transferencia" ? "Transferencia" : m.t}</button>`).join("")}</div></div>` : ""}
           <div class="form-row">
             <div class="field"><label for="dn-nombre">Tu nombre <span class="req">*</span></label><input id="dn-nombre" autocomplete="name"><span class="error-msg" id="dn-e-nombre"></span></div>
             <div class="field"><label for="dn-monto">${form.tipo === "especie" ? "¿Qué vas a llevar?" : "Monto (S/)"} <span class="req">*</span></label><input id="dn-monto" ${form.tipo === "especie" ? 'placeholder="Ej.: 2 sacos de comida"' : 'inputmode="decimal" placeholder="Ej.: 50"'}><span class="error-msg" id="dn-e-monto"></span></div>
@@ -104,7 +117,8 @@
     Object.entries(errs).forEach(([k, m]) => { const el = $("#dn-e-" + k); if (el) el.textContent = m; });
     const primero = Object.keys(errs).find((k) => errs[k]);
     if (primero) { const el = $({ nombre: "#dn-nombre", monto: "#dn-monto", tel: "#dn-tel", correo: "#dn-correo", ok: "#dn-ok" }[primero]); el && el.focus(); return; }
-    const tipoTxt = { linea: "En línea", persona: "Dinero en persona", especie: "Comida o insumos" }[form.tipo];
+    const medio = form.tipo === "linea" ? MEDIOS.find((m) => m.id === form.medio) : null;
+    const tipoTxt = { linea: "En línea" + (medio ? " (" + medio.t + ")" : ""), persona: "Dinero en persona", especie: "Comida o insumos" }[form.tipo];
     const donante = { nombre: v.n.trim(), tipo: tipoTxt, aporte: form.tipo === "especie" ? v.m.trim() : soles(montoNum), monto: form.tipo === "especie" ? null : montoNum,
       canal: form.canal, telefono: form.canal === "correo" ? "" : tel, correo: form.canal === "whatsapp" ? "" : v.c.trim(), destino: v.d || "Donde más se necesite",
       fecha: hoy(), estado: "Por confirmar", ultimaActualizacion: null };
@@ -117,6 +131,7 @@
     r.hidden = false; r.className = "wa-result";
     r.innerHTML = `<h4>${guardado ? "✔ ¡Gracias! Quedaste registrado/a" : "✔ Tu mensaje está listo"}</h4>
       <p>${guardado ? "El albergue confirmará tu donación cuando la reciba y te enviará actualizaciones del uso de tu aporte por " + ({ whatsapp: "WhatsApp", correo: "correo", ambos: "WhatsApp y correo" }[form.canal]) + ". Si quieres, avísale también ahora:" : (errorGuardar ? "No pudimos guardar tu registro (" + esc(errorGuardar) + "). Envía este mensaje al albergue para que te registre:" : "Envía este mensaje al albergue para que te registre y te mantenga al tanto:")}</p>
+      ${medio ? `<div class="don-medio"><strong>${medio.e} Ahora haz tu aporte de ${esc(donante.aporte)} por ${medio.t}</strong>${medioCuerpo(medio, D())}${medio.listo(D()) ? "" : `<small class="don-k">El albergue aún no registró este medio: pídele los datos por WhatsApp o elige otro medio.</small>`}</div>` : ""}
       <pre>${esc(msg)}</pre><div class="wa-actions">${wa ? `<a class="btn btn-wa" href="https://wa.me/${wa}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Avisar por WhatsApp</a>` : ""}<button type="button" class="btn btn-ghost" id="dnCopy">Copiar</button></div>`;
     $("#dnCopy").addEventListener("click", () => window.HT.copiar(msg));
     r.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -158,7 +173,9 @@
       <form class="panel" id="donCfgForm" novalidate><h3>Datos para donar</h3>
         <p class="hint" style="color:var(--muted)">Se muestran en la sección pública “Dona”. Deja vacío lo que no uses. El lugar y horario de entrega se toman de “Albergue y contacto”.</p>
         <div class="grid-3">${fld("Yape (número)", inp("yape", d.yape, 'inputmode="tel"'))}${fld("Plin (número)", inp("plin", d.plin, 'inputmode="tel"'))}${fld("Banco", inp("banco", d.banco, 'placeholder="Ej.: BCP"'))}
-          ${fld("N.º de cuenta", inp("cuenta", d.cuenta))}${fld("CCI", inp("cci", d.cci))}${fld("Titular", inp("titular", d.titular))}</div>
+          ${fld("N.º de cuenta", inp("cuenta", d.cuenta))}${fld("CCI", inp("cci", d.cci))}${fld("Titular (nombre que aparece en Yape/Plin/cuenta)", inp("titular", d.titular))}</div>
+        ${fld("Link de pago con tarjeta (opcional)", inp("linkTarjeta", d.linkTarjeta, 'type="url" placeholder="https://… (link de pago de Mercado Pago, Izipay, Niubiz, etc.)"'), "Crea un “link de pago” en tu pasarela y pégalo aquí. Debe empezar con https://. Si lo dejas vacío, la opción Tarjeta aparece como pendiente.")}
+        <span class="error-msg" id="donCfgError"></span>
         ${fld("Lo que más necesitamos (uno por línea; empieza con ! para marcar urgente)", `<textarea name="necesidades" placeholder="!Comida para cachorros&#10;Mantas&#10;Desinfectante">${esc((d.necesidades || []).join("\n"))}</textarea>`)}
         <div><button class="btn btn-primary" type="submit">Guardar datos de donación</button></div></form>
 
@@ -215,8 +232,8 @@
     const cp = e.target.closest("[data-copy]"); if (cp && $("#donaRoot") && $("#donaRoot").contains(cp)) { window.HT.copiar(cp.dataset.copy); return; }
     const root = $("#donaRoot");
     if (root && root.contains(e.target)) {
-      const tp = e.target.closest("[data-dtipo]"), cn = e.target.closest("[data-dcanal]");
-      if (tp || cn) { const v = leerForm(); if (tp) form.tipo = tp.dataset.dtipo; if (cn) form.canal = cn.dataset.dcanal; render(); ponerForm(v); }
+      const tp = e.target.closest("[data-dtipo]"), cn = e.target.closest("[data-dcanal]"), md = e.target.closest("[data-dmedio]");
+      if (tp || cn || md) { const v = leerForm(); if (tp) form.tipo = tp.dataset.dtipo; if (cn) form.canal = cn.dataset.dcanal; if (md) form.medio = md.dataset.dmedio; render(); ponerForm(v); }
       return;
     }
     const b = e.target.closest("#adminRoot [data-d]"); if (!b) return;
@@ -236,7 +253,8 @@
     if (e.target.id === "donForm") return enviar(e);
     if (e.target.id === "donCfgForm") {
       e.preventDefault(); const f = e.target, g = (n) => f.elements[n].value.trim();
-      return guardarDon({ yape: g("yape"), plin: g("plin"), banco: g("banco"), cuenta: g("cuenta"), cci: g("cci"), titular: g("titular"),
+      if (g("linkTarjeta") && !linkSeguro(g("linkTarjeta"))) { $("#donCfgError").textContent = "El link de pago debe empezar con https:// y no tener espacios."; return; }
+      return guardarDon({ yape: g("yape"), plin: g("plin"), banco: g("banco"), cuenta: g("cuenta"), cci: g("cci"), titular: g("titular"), linkTarjeta: g("linkTarjeta"),
         necesidades: g("necesidades").split("\n").map((s) => s.trim()).filter(Boolean) }, "Datos de donación guardados.");
     }
     if (e.target.id === "donMovForm") {
