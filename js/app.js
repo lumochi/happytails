@@ -342,6 +342,7 @@
     const c = cfg();
     const lineas = [
       `¡Hola${c.nombre ? ", " + c.nombre : ""}! Me interesa adoptar a ${d ? d.nombre : v("perrito")}.`, "",
+      ...(window.HT.cita && window.HT.cita.id === v("perrito") ? [`💘 Llegué por la cita a ciegas: ${window.HT.cita.pct}% de afinidad (mi perfil: ${window.HT.cita.perfil || "equilibrado"}).`, ""] : []),
       `• Nombre: ${v("nombre")}`, `• Distrito/ciudad: ${v("distrito")}`,
       ...($("#f-compartir").checked ? [`• Correo: ${v("correo")}`, `• Teléfono: ${v("telefono")}`] : []),
       "", `¿Por qué quiero adoptar?`, v("motivo"), "", `Mi hogar y experiencia con animales:`, v("hogar"), "",
@@ -368,7 +369,7 @@
   window.addEventListener("scroll", () => $(".header").classList.toggle("scrolled", window.scrollY > 10), { passive: true });
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((ents) => ents.forEach((en) => { if (en.isIntersecting) $$(".nav a").forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id)); }), { rootMargin: "-45% 0px -50% 0px" });
-    ["inicio", "perritos", "como-adoptar", "nosotros"].forEach((id) => io.observe(document.getElementById(id)));
+    ["inicio", "perritos", "cita", "como-adoptar", "nosotros"].forEach((id) => io.observe(document.getElementById(id)));
   }
 
   /* ================= PANEL DE ADMINISTRACIÓN ================= */
@@ -621,6 +622,9 @@
     if (e.target.id === "statsForm") { const c = Object.assign({}, cfg(), { stats: leerStats() }); return ejecutar(() => store.guardarConfig(c), "Estadísticas guardadas."); }
   });
 
+  /* API mínima para módulos externos (js/cita.js) */
+  window.HT = { datos: () => D, foto: (d) => fotoPrincipal(d), elegirPerrito: (id) => elegirPerrito(id), cita: null };
+
   /* ================= ARRANQUE ================= */
   function aplicarDatos(nuevo, error) {
     if (error) { toast(error, "error"); return; }
@@ -632,6 +636,7 @@
     if (A.abierto && !A.editando) renderAdmin();
     $("#adminOpen").hidden = !(store && store.puedeAdministrar());
     if (store && !aplicarDatos._hash) { aplicarDatos._hash = true; abrirDesdeHash(); }
+    document.dispatchEvent(new Event("ht:datos"));
   }
   function abrirDesdeHash() {
     const h = location.hash.slice(1);
@@ -649,7 +654,7 @@
     if (s.modo === "local") msgs.push("Modo local: los cambios del panel se guardan solo en este navegador." + (s.persistente === false ? " Este navegador no permite guardar datos." : ""));
     if (s.modo === "lectura") msgs.push(s.descripcion);
     if (msgs.length) { banner.hidden = false; banner.textContent = msgs.join(" "); }
-    if (cargado) { renderSitio(); renderCatalogo(); renderSelectPerritos(); $("#adminOpen").hidden = !s.puedeAdministrar(); if (!aplicarDatos._hash) { aplicarDatos._hash = true; abrirDesdeHash(); } }
+    if (cargado) { renderSitio(); renderCatalogo(); renderSelectPerritos(); document.dispatchEvent(new Event("ht:datos")); $("#adminOpen").hidden = !s.puedeAdministrar(); if (!aplicarDatos._hash) { aplicarDatos._hash = true; abrirDesdeHash(); } }
     // Por si el primer snapshot llegó antes de tener `store` (para resolver fotos):
     else setTimeout(() => { if (cargado) { renderSitio(); renderCatalogo(); } }, 0);
   });
