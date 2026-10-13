@@ -158,6 +158,11 @@
         return sb.storage.from("fotos").getPublicUrl(ruta).data.publicUrl;
       },
       resolverFoto: (ref) => ref || "",
+      donantesPrivados: true,
+      async registrarDonante(datos) { comprobar(await sb.from("donantes").insert({ datos })); },
+      async listarDonantes() { return comprobar(await sb.from("donantes").select("id, datos, creado").order("creado", { ascending: false })); },
+      async actualizarDonante(id, datos) { comprobar(await sb.from("donantes").update({ datos }).eq("id", id)); },
+      async eliminarDonante(id) { comprobar(await sb.from("donantes").delete().eq("id", id)); },
       async importar(datos) {
         comprobar(await sb.from("perritos").upsert(datos.perritos.map((d) => ({ id: d.id, datos: copia(d), actualizado: new Date().toISOString() }))));
         const ids = datos.perritos.map((d) => d.id);

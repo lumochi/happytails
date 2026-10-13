@@ -370,7 +370,7 @@
   window.addEventListener("scroll", () => $(".header").classList.toggle("scrolled", window.scrollY > 10), { passive: true });
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((ents) => ents.forEach((en) => { if (en.isIntersecting) $$(".nav a").forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id)); }), { rootMargin: "-45% 0px -50% 0px" });
-    ["inicio", "perritos", "cita", "apadrina", "como-adoptar", "nosotros"].forEach((id) => io.observe(document.getElementById(id)));
+    ["inicio", "perritos", "cita", "apadrina", "dona", "como-adoptar", "nosotros"].forEach((id) => io.observe(document.getElementById(id)));
   }
 
   /* ================= PANEL DE ADMINISTRACIÓN ================= */
@@ -400,7 +400,7 @@
   function renderAdmin() {
     if (!A.abierto) return;
     const loginNecesario = store.necesitaLogin && !store.sesion;
-    const tabs = [["perritos", "Perritos"], ["albergue", "Albergue y contacto"], ["stats", "Estadísticas"], ["datos", "Datos y almacenamiento"]];
+    const tabs = [["perritos", "Perritos"], ["albergue", "Albergue y contacto"], ["stats", "Estadísticas"], ["donaciones", "Donaciones"], ["datos", "Datos y almacenamiento"]];
     $("#adminRoot").innerHTML = `<div class="admin" role="dialog" aria-modal="true" aria-label="Panel de administración">
       <div class="admin-top"><div class="wrap"><span class="brand-mark" aria-hidden="true">${icon("i-paw")}</span><h2>Panel de administración</h2><span class="spacer"></span>
         ${store.necesitaLogin && store.sesion ? `<button class="btn btn-ghost btn-sm" data-a="logout">Cerrar sesión</button>` : ""}
@@ -418,6 +418,7 @@
     if (A.tab === "perritos") return A.editando ? vistaEditor() : `<div style="display:grid;gap:16px">${aviso}${vistaLista()}</div>`;
     if (A.tab === "albergue") return vistaAlbergue();
     if (A.tab === "stats") return vistaStats();
+    if (A.tab === "donaciones") return window.HT_DON ? window.HT_DON.vistaAdmin() : "";
     return `<div style="display:grid;gap:16px">${aviso}${vistaDatos()}</div>`;
   }
   function vistaLista() {
@@ -555,7 +556,7 @@
 
   // Eventos del panel (delegados)
   $("#adminRoot").addEventListener("click", async (e) => {
-    const t = e.target.closest("[data-tab]"); if (t) { sincronizarBorrador(); A.tab = t.dataset.tab; A.confirmar = null; renderAdmin(); return; }
+    const t = e.target.closest("[data-tab]"); if (t && window.HT_DON && A.tab === "donaciones") window.HT_DON.alSalir && window.HT_DON.alSalir(); if (t) { sincronizarBorrador(); A.tab = t.dataset.tab; A.confirmar = null; renderAdmin(); return; }
     const b = e.target.closest("[data-a]"); if (!b || b.tagName === "INPUT") return;
     const a = b.dataset.a, id = b.dataset.id, i = +b.dataset.i;
     if (a === "cerrar") return cerrarAdmin();
@@ -631,7 +632,8 @@
   });
 
   /* API mínima para módulos externos (js/cita.js) */
-  window.HT = { datos: () => D, cfg: () => cfg(), foto: (d) => fotoPrincipal(d), elegirPerrito: (id) => elegirPerrito(id), cerrarFicha: () => cerrarFicha(), toast, copiar, cita: null };
+  window.HT = { datos: () => D, cfg: () => cfg(), foto: (d) => fotoPrincipal(d), elegirPerrito: (id) => elegirPerrito(id), cerrarFicha: () => cerrarFicha(), toast, copiar, cita: null,
+    store: () => store, ejecutar: (fn, ok) => ejecutar(fn, ok), renderAdmin: () => renderAdmin(), guardarConfig: (c) => store.guardarConfig(c) };
 
   /* ================= ARRANQUE ================= */
   function aplicarDatos(nuevo, error) {
