@@ -230,7 +230,8 @@
           <div class="quiz-actions">
             <button class="btn btn-primary" data-q="adoptar" data-id="${esc(top.m.id)}">💘 ¡Quiero mi cita con ${esc(top.m.nombre)}!</button>
             <button class="btn btn-soft" data-ver="${esc(top.m.id)}">Ver su ficha</button>
-          </div></div></div>
+          </div>
+          <button class="linkish" data-apadrinar="${esc(top.m.id)}" style="justify-self:start">🤝 ¿No puedes adoptar ahora? Apadrina a ${esc(top.m.nombre)}</button></div></div>
       ${alt.length ? `<div class="alt"><h4>También podrías conectar con…</h4><div class="alt-row">
         ${alt.map((r) => `<button class="alt-card" data-ver="${esc(r.m.id)}"><img src="${esc(window.HT.foto(r.m))}" alt=""><span><strong>${esc(r.m.nombre)}</strong><small>${r.pct}% afinidad · ${esc((r.usados[0] || r.m.tamano || "").toLowerCase())}</small></span></button>`).join("")}
       </div></div>` : ""}

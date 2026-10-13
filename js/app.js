@@ -54,7 +54,7 @@
     const noPerro = d.especie && d.especie !== "Perro" ? `<span class="tag warn">${esc(d.especie)}</span>` : "";
     return `<article class="card ${d.estado === "adoptado" ? "is-adopted" : ""}">
       <div class="card-photo"><img src="${esc(fotoPrincipal(d))}" alt="Foto de ${esc(d.nombre)}" loading="lazy" width="640" height="640">${badgeEstado(d.estado)}
-        ${d.destacado ? `<span class="fav" title="Destacado">${icon("i-heart")}</span>` : ""}</div>
+        ${d.destacado ? `<span class="fav" title="Destacado">${icon("i-heart")}</span>` : ""}${d.apadrinado ? `<span class="padrino-badge">💛 Apadrinado</span>` : ""}</div>
       <div class="card-body">
         <div class="card-title"><h3>${esc(d.nombre)}</h3><span class="sex">${esc(d.sexo || "")}</span></div>
         <div class="card-meta">
@@ -143,7 +143,8 @@
         <div class="dossier-cta">${adoptado
           ? `<button class="btn btn-primary" disabled>${esc(d.nombre)} ya encontró un hogar</button>`
           : `<button class="btn btn-primary" data-adoptar="${esc(d.id)}">${icon("i-heart")}¡Quiero adoptar a ${esc(d.nombre)}!</button>`}
-          ${d.estado === "proceso" ? `<p style="font-size:13px;color:var(--muted);text-align:center;margin-top:6px">Ya tiene una adopción en proceso, pero puedes dejar tu interés.</p>` : ""}</div>
+          ${d.estado === "proceso" ? `<p style="font-size:13px;color:var(--muted);text-align:center;margin-top:6px">Ya tiene una adopción en proceso, pero puedes dejar tu interés.</p>` : ""}
+          ${!adoptado ? `<button class="btn btn-ghost" data-apadrinar="${esc(d.id)}" style="width:100%;margin-top:8px">🤝 ¿No puedes adoptar? Apadrina a ${esc(d.nombre)}</button>` : ""}</div>
       </div></div>`;
   }
 
@@ -369,7 +370,7 @@
   window.addEventListener("scroll", () => $(".header").classList.toggle("scrolled", window.scrollY > 10), { passive: true });
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((ents) => ents.forEach((en) => { if (en.isIntersecting) $$(".nav a").forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id)); }), { rootMargin: "-45% 0px -50% 0px" });
-    ["inicio", "perritos", "cita", "como-adoptar", "nosotros"].forEach((id) => io.observe(document.getElementById(id)));
+    ["inicio", "perritos", "cita", "apadrina", "como-adoptar", "nosotros"].forEach((id) => io.observe(document.getElementById(id)));
   }
 
   /* ================= PANEL DE ADMINISTRACIÓN ================= */
@@ -453,6 +454,7 @@
         ${fld("Estado de adopción", sel("estado", d.estado, Object.entries(ESTADOS)))}
       </div>
       <label class="check"><input type="checkbox" name="destacado" ${d.destacado ? "checked" : ""}> Mostrar en “Perritos destacados”</label>
+      <label class="check"><input type="checkbox" name="apadrinado" ${d.apadrinado ? "checked" : ""}> Ya tiene padrino o madrina (muestra la insignia 💛 Apadrinado)</label>
       ${fld("Su historia", `<textarea name="historia">${esc(d.historia)}</textarea>`, "Cómo llegó al albergue, cómo es su día a día…")}</fieldset>
       <fieldset class="fieldset"><legend>Personalidad y comportamiento</legend>
         ${fld("Rasgos de personalidad", inp("rasgos", (d.rasgos || []).join(", ")), "Separados por comas. Ej.: Cariñoso, Juguetón, Tranquilo")}
@@ -479,7 +481,7 @@
     const g = (n) => (f.elements[n] ? f.elements[n].value.trim() : "");
     const d = A.borrador;
     Object.assign(d, { nombre: g("nombre"), especie: g("especie"), sexo: g("sexo"), edad: g("edad"), etapa: g("etapa"), raza: g("raza"), tamano: g("tamano"),
-      estado: g("estado") || "disponible", destacado: f.elements.destacado.checked, historia: g("historia"), energia: g("energia"), cuidados: g("cuidados"), saludAfiche: g("saludAfiche"),
+      estado: g("estado") || "disponible", destacado: f.elements.destacado.checked, apadrinado: f.elements.apadrinado.checked, historia: g("historia"), energia: g("energia"), cuidados: g("cuidados"), saludAfiche: g("saludAfiche"),
       rasgos: g("rasgos").split(",").map((s) => s.trim()).filter(Boolean), notas: g("notas").split("\n").map((s) => s.trim()).filter(Boolean) });
     const p = g("pesoKg").replace(",", "."); d.pesoKg = p === "" ? "" : (isNaN(+p) ? p : +p);
     d.compatibilidad = { ninos: g("c_ninos"), perros: g("c_perros"), gatos: g("c_gatos") };
@@ -497,6 +499,11 @@
         ${fld("Número de WhatsApp del albergue", inp("whatsapp", c.whatsapp, 'inputmode="tel" placeholder="Código de país + número, sin espacios"'), "Ej. para Perú: 51 seguido de los 9 dígitos del celular. Es el número que recibirá los mensajes del formulario. Déjalo vacío si aún no está definido.")}
         <div class="grid-3">${fld("Instagram / redes", inp("instagram", c.instagram, 'placeholder="@usuario o enlace"'))}${fld("Correo", inp("correo", c.correo, 'type="email"'))}
           ${fld("Ubicación", inp("ubicacion", c.ubicacion))}${fld("Horario de visitas", inp("horario", c.horario))}</div></fieldset>
+      <fieldset class="fieldset"><legend>Apadrinamiento</legend>
+        <p class="hint" style="color:var(--muted)">Montos sugeridos que verán los padrinos. Déjalos vacíos para mostrar “a coordinar con el albergue”.</p>
+        <div class="grid-3">${fld("Padrino de alimento", inp("ap_alimento", (c.apadrinaje || {}).alimento, 'placeholder="Ej.: S/ 40 al mes"'))}
+          ${fld("Padrino de salud", inp("ap_salud", (c.apadrinaje || {}).salud, 'placeholder="Ej.: S/ 30 al mes"'))}
+          ${fld("Aporte libre (texto)", inp("ap_libre", (c.apadrinaje || {}).libre, 'placeholder="Ej.: desde S/ 10"'))}</div></fieldset>
       <span class="error-msg" id="cfgError"></span>
       <div><button class="btn btn-primary" type="submit">Guardar</button></div></form>`;
   }
@@ -616,14 +623,15 @@
       const wa = g("whatsapp").replace(/[\s()+-]/g, "");
       if (wa && !/^\d{8,15}$/.test(wa)) { $("#cfgError").textContent = "El WhatsApp debe tener solo dígitos, con código de país (8 a 15 dígitos)."; return; }
       if (!g("nombre")) { $("#cfgError").textContent = "El nombre del albergue es obligatorio."; return; }
-      const c = Object.assign({}, cfg(), { nombre: g("nombre"), lema: g("lema"), heroFoto: g("heroFoto"), descripcion: g("descripcion"), whatsapp: wa, instagram: g("instagram"), correo: g("correo"), ubicacion: g("ubicacion"), horario: g("horario") });
+      const c = Object.assign({}, cfg(), { nombre: g("nombre"), lema: g("lema"), heroFoto: g("heroFoto"), descripcion: g("descripcion"), whatsapp: wa, instagram: g("instagram"), correo: g("correo"), ubicacion: g("ubicacion"), horario: g("horario"),
+        apadrinaje: { alimento: g("ap_alimento"), salud: g("ap_salud"), libre: g("ap_libre") } });
       return ejecutar(() => store.guardarConfig(c), "Datos del albergue guardados.");
     }
     if (e.target.id === "statsForm") { const c = Object.assign({}, cfg(), { stats: leerStats() }); return ejecutar(() => store.guardarConfig(c), "Estadísticas guardadas."); }
   });
 
   /* API mínima para módulos externos (js/cita.js) */
-  window.HT = { datos: () => D, foto: (d) => fotoPrincipal(d), elegirPerrito: (id) => elegirPerrito(id), cita: null };
+  window.HT = { datos: () => D, cfg: () => cfg(), foto: (d) => fotoPrincipal(d), elegirPerrito: (id) => elegirPerrito(id), cerrarFicha: () => cerrarFicha(), toast, copiar, cita: null };
 
   /* ================= ARRANQUE ================= */
   function aplicarDatos(nuevo, error) {
