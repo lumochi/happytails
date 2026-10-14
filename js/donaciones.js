@@ -37,7 +37,7 @@
     let cuerpo;
     if (!listo) cuerpo = `<p class="don-k">${PEND}</p>`;
     else if (m.id === "tarjeta") cuerpo =`<a class="btn btn-soft btn-sm" href="${esc(linkSeguro(d.linkTarjeta))}" target="_blank" rel="noopener">Pagar con tarjeta ↗</a><small class="don-k">Se abre la pasarela de pago segura del albergue. Esta página no ve ni guarda los datos de tu tarjeta.</small>`;
-    else cuerpo = (m.qr && d[m.qr] ? `<div class="don-qr"><img src="${esc(window.HT.foto(d[m.qr]))}" alt="Código QR de ${m.t} del albergue" loading="lazy"><small>Escanéalo desde la app ${m.t} (Escanear QR). Si estás en el celular, usa el número o sube una captura del QR desde la opción de galería de la app.</small></div>` : "") + `<dl class="don-pay">${m.filas(d).filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd><span>${esc(v)}</span>${k === "Titular" || k === "A nombre de" || k === "Banco" ? "" : `<button class="linkish" data-copy="${esc(v)}">Copiar</button>`}</dd></div>`).join("")}</dl>`;
+    else cuerpo = (m.qr && d[m.qr] ? `<div class="don-qr"><img src="${esc(window.HT.fotoRef(d[m.qr]))}" alt="Código QR de ${m.t} del albergue" loading="lazy"><small>Escanéalo desde la app ${m.t} (Escanear QR). Si estás en el celular, usa el número o sube una captura del QR desde la opción de galería de la app.</small></div>` : "") + `<dl class="don-pay">${m.filas(d).filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd><span>${esc(v)}</span>${k === "Titular" || k === "A nombre de" || k === "Banco" ? "" : `<button class="linkish" data-copy="${esc(v)}">Copiar</button>`}</dd></div>`).join("")}</dl>`;
     return cuerpo;
   }
 
@@ -179,7 +179,7 @@
         <div class="grid-3">${fld("Yape (número)", inp("yape", d.yape, 'inputmode="tel"'))}${fld("Plin (número)", inp("plin", d.plin, 'inputmode="tel"'))}${fld("Banco", inp("banco", d.banco, 'placeholder="Ej.: BCP"'))}
           ${fld("N.º de cuenta", inp("cuenta", d.cuenta))}${fld("CCI", inp("cci", d.cci))}${fld("Titular (nombre que aparece en Yape/Plin/cuenta)", inp("titular", d.titular))}</div>
         <div class="don-qr-admin">${[["yapeQR", "Yape"], ["plinQR", "Plin"]].map(([k, t]) => `<div class="field"><span class="label">QR de ${t} (opcional)</span>
-          ${d[k] ? `<div class="don-qr"><img src="${esc(window.HT.foto(d[k]))}" alt="QR de ${t}"><button type="button" class="btn btn-danger btn-sm" data-d="qr-del" data-id="${k}">Quitar QR</button></div>`
+          ${d[k] ? `<div class="don-qr"><img src="${esc(window.HT.fotoRef(d[k]))}" alt="QR de ${t}"><button type="button" class="btn btn-danger btn-sm" data-d="qr-del" data-id="${k}">Quitar QR</button></div>`
             : `<label class="upload-box" style="min-height:90px">${AD.subiendo === k ? "Subiendo…" : `+ Subir QR de ${t}<br><small>Captura de tu app ${t} → “Mi QR”</small>`}<input type="file" accept="image/*" class="sr-only" data-qr="${k}"></label>`}</div>`).join("")}</div>
         ${fld("Link de pago con tarjeta (opcional)", inp("linkTarjeta", d.linkTarjeta, 'type="url" placeholder="https://… (link de pago de Mercado Pago, Izipay, Niubiz, etc.)"'), "Crea un “link de pago” en tu pasarela y pégalo aquí. Debe empezar con https://. Si lo dejas vacío, la opción Tarjeta aparece como pendiente.")}
         <span class="error-msg" id="donCfgError"></span>

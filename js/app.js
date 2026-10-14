@@ -632,7 +632,7 @@
   });
 
   /* API mínima para módulos externos (js/cita.js) */
-  window.HT = { datos: () => D, cfg: () => cfg(), foto: (d) => fotoPrincipal(d), elegirPerrito: (id) => elegirPerrito(id), cerrarFicha: () => cerrarFicha(), toast, copiar, cita: null,
+  window.HT = { datos: () => D, cfg: () => cfg(), foto: (d) => fotoPrincipal(d), fotoRef: (r) => foto(r), elegirPerrito: (id) => elegirPerrito(id), cerrarFicha: () => cerrarFicha(), toast, copiar, cita: null,
     store: () => store, ejecutar: (fn, ok) => ejecutar(fn, ok), renderAdmin: () => renderAdmin(), guardarConfig: (c) => store.guardarConfig(c) };
 
   /* ================= ARRANQUE ================= */
