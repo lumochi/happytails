@@ -45,6 +45,9 @@
   const fotoPrincipal = (d) => foto((d.fotos || [])[0]) || PLACEHOLDER;
   const cfg = () => D.config || {};
   const articulo = (d) => (d.sexo === "Hembra" ? "a" : "o");
+  const DIAS_RECIEN = 45;
+  function esRecien(d) { if (!d.fechaIngreso || d.estado === "adoptado") return false; const t = new Date(d.fechaIngreso + "T12:00:00"); return !isNaN(t) && (Date.now() - t) / 864e5 <= DIAS_RECIEN; }
+  function fechaLarga(iso) { const t = new Date(iso + "T12:00:00"); return isNaN(t) ? iso : t.toLocaleDateString("es-PE", { day: "numeric", month: "long", year: "numeric" }); }
 
   /* ================= COMPONENTES ================= */
   function badgeEstado(e) { return `<span class="badge ${esc(e || "disponible")}">${esc(ESTADOS[e] || "Disponible")}</span>`; }
@@ -54,11 +57,11 @@
     const noPerro = d.especie && d.especie !== "Perro" ? `<span class="tag warn">${esc(d.especie)}</span>` : "";
     return `<article class="card ${d.estado === "adoptado" ? "is-adopted" : ""}">
       <div class="card-photo"><img src="${esc(fotoPrincipal(d))}" alt="Foto de ${esc(d.nombre)}" loading="lazy" width="640" height="640">${badgeEstado(d.estado)}
-        ${d.destacado ? `<span class="fav" title="Destacado">${icon("i-heart")}</span>` : ""}${d.apadrinado ? `<span class="padrino-badge">💛 Apadrinado</span>` : ""}</div>
+        ${d.destacado ? `<span class="fav" title="Destacado">${icon("i-heart")}</span>` : ""}${d.apadrinado ? `<span class="padrino-badge">💛 Apadrinado</span>` : ""}${esRecien(d) ? `<span class="recien-badge">🌱 Recién llegad${articulo(d)}</span>` : ""}</div>
       <div class="card-body">
         <div class="card-title"><h3>${esc(d.nombre)}</h3><span class="sex">${esc(d.sexo || "")}</span></div>
         <div class="card-meta">
-          <span>${icon("i-cake")}${d.edad ? esc(d.edad) : '<span class="pending">Edad por confirmar</span>'}</span>
+          <span>${icon("i-cake")}${d.edad ? esc(d.edad) : d.etapa ? esc(d.etapa === "Senior" ? "Adulto mayor" : d.etapa) : '<span class="pending">Edad por confirmar</span>'}</span>
           <span>${iconS("i-ruler")}${pend(d.tamano, "Tamaño por confirmar")}</span>
           ${d.pesoKg ? `<span>${iconS("i-weight")}${esc(d.pesoKg)} kg</span>` : ""}
           ${d.raza ? `<span>${esc(d.raza)}</span>` : ""}
@@ -131,6 +134,7 @@
           <div class="fact"><span class="k">Raza</span><span class="v ${d.raza ? "" : "pending"}">${d.raza ? esc(d.raza) : PEND}</span></div>
         </div>
         <div class="block"><h3>${icon("i-paw")}Su historia</h3>
+          ${d.fechaIngreso ? `<p class="llegada">🏡 Llegó al albergue el ${esc(fechaLarga(d.fechaIngreso))}${d.estado !== "adoptado" ? ` y desde entonces espera a su familia.` : "."}</p>` : ""}
           <p>${descripcionBase(d)}</p>
           <p>${d.historia ? esc(d.historia) : `<span class="pending">Su historia aún no ha sido registrada por el albergue.</span>`}</p></div>
         <div class="block"><h3>${iconS("i-smile")}Personalidad y comportamiento</h3>
@@ -143,6 +147,7 @@
         <div class="dossier-cta">${adoptado
           ? `<button class="btn btn-primary" disabled>${esc(d.nombre)} ya encontró un hogar</button>`
           : `<button class="btn btn-primary" data-adoptar="${esc(d.id)}">${icon("i-heart")}¡Quiero adoptar a ${esc(d.nombre)}!</button>`}
+          ${!adoptado ? `<p class="cta-sensible">${esc(d.nombre)} todavía no sabe que tú puedes ser su familia. 💛</p>` : ""}
           ${d.estado === "proceso" ? `<p style="font-size:13px;color:var(--muted);text-align:center;margin-top:6px">Ya tiene una adopción en proceso, pero puedes dejar tu interés.</p>` : ""}
           ${!adoptado ? `<button class="btn btn-ghost" data-apadrinar="${esc(d.id)}" style="width:100%;margin-top:8px">🤝 ¿No puedes adoptar? Apadrina a ${esc(d.nombre)}</button>` : ""}</div>
       </div></div>`;
@@ -198,7 +203,7 @@
     // Destacados
     let dest = D.perritos.filter((d) => d.destacado && d.estado !== "adoptado");
     if (!dest.length) dest = D.perritos.filter((d) => d.estado === "disponible");
-    dest = dest.sort((a, b) => (a.orden || 999) - (b.orden || 999)).slice(0, 8);
+    dest = dest.sort((a, b) => (Number.isFinite(+a.orden) && a.orden !== "" ? +a.orden : 999) - (Number.isFinite(+b.orden) && b.orden !== "" ? +b.orden : 999)).slice(0, 8);
     $("#featuredRow").innerHTML = dest.length ? dest.map(Tarjeta).join("") : `<div class="empty"><p>Aún no hay perritos destacados.</p></div>`;
 
     // Estadísticas
@@ -266,7 +271,7 @@
     return true;
   }
   const ORDENES = {
-    orden: (a, b) => (a.estado === "adoptado") - (b.estado === "adoptado") || (a.orden || 999) - (b.orden || 999) || a.nombre.localeCompare(b.nombre),
+    orden: (a, b) => (a.estado === "adoptado") - (b.estado === "adoptado") || (Number.isFinite(+a.orden) && a.orden !== "" ? +a.orden : 999) - (Number.isFinite(+b.orden) && b.orden !== "" ? +b.orden : 999) || a.nombre.localeCompare(b.nombre),
     az: (a, b) => a.nombre.localeCompare(b.nombre, "es"), za: (a, b) => b.nombre.localeCompare(a.nombre, "es"),
     "peso-asc": (a, b) => (a.pesoKg || 1e9) - (b.pesoKg || 1e9), "peso-desc": (a, b) => (b.pesoKg || -1) - (a.pesoKg || -1),
     recientes: (a, b) => String(b.actualizado || "").localeCompare(String(a.actualizado || "")),
@@ -374,7 +379,7 @@
   }
 
   /* ================= PANEL DE ADMINISTRACIÓN ================= */
-  const A = { abierto: false, tab: "perritos", editando: null, borrador: null, confirmar: null, filtro: "", ocupado: false };
+  const A = { abierto: false, tab: "registrar", editando: null, borrador: null, confirmar: null, filtro: "", ocupado: false };
 
   function perritoVacio() {
     return { id: "", nombre: "", especie: "Perro", sexo: "", pesoKg: "", tamano: "", edad: "", etapa: "", raza: "", energia: "", rasgos: [],
@@ -388,7 +393,7 @@
   }
   function cerrarAdmin() {
     A.abierto = false; A.editando = null; A.borrador = null; $("#adminRoot").innerHTML = ""; document.body.style.overflow = "";
-    if (location.hash === "#admin") history.replaceState(null, "", location.pathname + location.search);
+    if (location.hash === "#admin" || location.hash === "#registrar") history.replaceState(null, "", location.pathname + location.search);
   }
   $("#adminOpen").addEventListener("click", abrirAdmin);
 
@@ -400,7 +405,7 @@
   function renderAdmin() {
     if (!A.abierto) return;
     const loginNecesario = store.necesitaLogin && !store.sesion;
-    const tabs = [["perritos", "Perritos"], ["albergue", "Albergue y contacto"], ["stats", "Estadísticas"], ["donaciones", "Donaciones"], ["datos", "Datos y almacenamiento"]];
+    const tabs = [["registrar", "🐶 Nuevo peludito"], ["perritos", "Perritos"], ["albergue", "Albergue y contacto"], ["stats", "Estadísticas"], ["donaciones", "Donaciones"], ["datos", "Datos y almacenamiento"]];
     $("#adminRoot").innerHTML = `<div class="admin" role="dialog" aria-modal="true" aria-label="Panel de administración">
       <div class="admin-top"><div class="wrap"><span class="brand-mark" aria-hidden="true">${icon("i-paw")}</span><h2>Panel de administración</h2><span class="spacer"></span>
         ${store.necesitaLogin && store.sesion ? `<button class="btn btn-ghost btn-sm" data-a="logout">Cerrar sesión</button>` : ""}
@@ -415,6 +420,7 @@
   }
   function vistaTab() {
     const aviso = `<div class="note ${store.modo === "local" ? "" : "sage"}">${icon("i-info")}<span><strong>${{ artifact: "Base de datos compartida", supabase: "Supabase", local: "Modo local (limitado)", lectura: "Solo lectura" }[store.modo]}:</strong> ${esc(store.descripcion)}</span></div>`;
+    if (A.tab === "registrar") return window.HT_REG ? window.HT_REG.vista() : "";
     if (A.tab === "perritos") return A.editando ? vistaEditor() : `<div style="display:grid;gap:16px">${aviso}${vistaLista()}</div>`;
     if (A.tab === "albergue") return vistaAlbergue();
     if (A.tab === "stats") return vistaStats();
@@ -632,7 +638,7 @@
   });
 
   /* API mínima para módulos externos (js/cita.js) */
-  window.HT = { datos: () => D, cfg: () => cfg(), foto: (d) => fotoPrincipal(d), fotoRef: (r) => foto(r), elegirPerrito: (id) => elegirPerrito(id), cerrarFicha: () => cerrarFicha(), toast, copiar, cita: null,
+  window.HT = { datos: () => D, cfg: () => cfg(), foto: (d) => fotoPrincipal(d), fotoRef: (r) => foto(r), tarjeta: (d) => Tarjeta(d), abrirFicha: (id) => abrirFicha(id), cerrarAdmin: () => cerrarAdmin(), irATab: (t) => { A.tab = t; A.editando = null; A.borrador = null; renderAdmin(); }, slug: (s) => slug(s), elegirPerrito: (id) => elegirPerrito(id), cerrarFicha: () => cerrarFicha(), toast, copiar, cita: null,
     store: () => store, ejecutar: (fn, ok) => ejecutar(fn, ok), renderAdmin: () => renderAdmin(), guardarConfig: (c) => store.guardarConfig(c) };
 
   /* ================= ARRANQUE ================= */
@@ -651,9 +657,10 @@
   function abrirDesdeHash() {
     const h = location.hash.slice(1);
     if (h === "admin") abrirAdmin();
+    else if (h === "registrar") { A.tab = "registrar"; abrirAdmin(); }
     else if (h.startsWith("perrito-")) abrirFicha(h.slice(8));
   }
-  window.addEventListener("hashchange", () => { if (location.hash === "#admin") abrirAdmin(); });
+  window.addEventListener("hashchange", () => { if (location.hash === "#admin") abrirAdmin(); else if (location.hash === "#registrar") { A.tab = "registrar"; abrirAdmin(); } });
 
   orden = ls.get("patas.orden") || "orden"; $("#sort").value = ORDENES[orden] ? orden : "orden";
   window.Almacenamiento.crear(aplicarDatos).then((s) => {

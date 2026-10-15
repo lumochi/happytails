@@ -7,7 +7,7 @@
 <meta name="description" content="Adopta a un perrito rescatado: catálogo, fichas médicas y formulario de interés.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap">
-<link rel="stylesheet" href="css/estilos.css?v=259c9fbf">
+<link rel="stylesheet" href="css/estilos.css?v=98fdd400">
 </head>
 <body>
 <a class="sr-only" href="#perritos">Saltar al catálogo</a>
@@ -63,6 +63,18 @@
     </div>
   </section>
 
+  <!-- RECIÉN LLEGADOS (se muestra solo si hay perritos que llegaron hace poco) -->
+  <section class="section recien" id="recien" hidden>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-heart"/></svg>Recién llegados</span>
+        <h2>Acaban de llegar y ya sueñan con un hogar</h2>
+        <p>Llegaron al albergue hace poco, todavía un poco asustados. Un hogar que los reciba ahora puede cambiarlo todo para ellos.</p>
+      </div>
+      <div class="featured-row" id="recienRow"></div>
+    </div>
+  </section>
+
   <!-- DESTACADOS -->
   <section class="section featured" id="destacados">
     <div class="wrap">
@@ -87,6 +99,23 @@
       </div>
       <div class="stats" id="stats"></div>
       <p class="impact-note" id="impactNote"></p>
+    </div>
+  </section>
+
+  <!-- LO QUE CAMBIA CUANDO ADOPTAS -->
+  <section class="section sentir" id="sentir">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-paw"/></svg>Lo que cambia cuando adoptas</span>
+        <h2>Para ti es una decisión. Para él, es toda su vida.</h2>
+      </div>
+      <div class="sentir-grid">
+        <article><span aria-hidden="true">🏡</span><h3>Deja de esperar</h3><p>Cada uno de ellos pasa los días mirando la puerta. Adoptar es ser, por fin, la persona que entra por ella para quedarse.</p></article>
+        <article><span aria-hidden="true">💛</span><h3>Su nombre, dicho con cariño</h3><p>Pasa de ser uno más en el albergue a ser alguien a quien llaman por su nombre, que tiene su cama, su plato y su lugar en el sofá.</p></article>
+        <article><span aria-hidden="true">🐾</span><h3>Un espacio para otro rescate</h3><p>Cada adopción libera un lugar en el albergue para rescatar a otro peludito que hoy sigue en la calle.</p></article>
+        <article><span aria-hidden="true">🤝</span><h3>Un amigo que te elige cada día</h3><p>Te recibirá en la puerta como si fuera la mejor noticia del día. Así, todos los días.</p></article>
+      </div>
+      <p class="sentir-cierre">Ninguno eligió estar aquí. Tú sí puedes elegir cambiar su historia. <a href="#perritos">Conócelos →</a></p>
     </div>
   </section>
 
@@ -219,7 +248,7 @@
     <div><strong data-bind="nombre">Happy Tails</strong><p>Proyecto universitario de apoyo a la adopción responsable.</p></div>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <a class="btn btn-ghost btn-sm" href="#inicio">Volver arriba</a>
-      <button class="btn btn-ghost btn-sm" id="adminOpen" hidden>Administrar</button>
+      <button class="btn btn-ghost btn-sm" id="adminOpen" hidden>🔒 Acceso del albergue</button>
     </div>
   </div>
 </footer>
@@ -249,9 +278,10 @@
 <script src="js/config.js?v=7f3f3490"></script>
 <script src="data/perritos.js?v=41d72428"></script>
 <script src="js/almacenamiento.js?v=883c2c13"></script>
-<script src="js/app.js?v=30bb517c"></script>
+<script src="js/app.js?v=b32b5d8d"></script>
 <script src="js/cita.js?v=bcd40d1d"></script>
 <script src="js/apadrina.js?v=8777aeba"></script>
 <script src="js/donaciones.js?v=0c07a9c5"></script>
+<script src="js/registrar.js?v=237d99e7"></script>
 </body>
 </html>
