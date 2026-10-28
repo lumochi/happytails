@@ -125,10 +125,13 @@
     let sesion = (await sb.auth.getSession()).data.session;
     const comprobar = (r) => { if (r.error) throw new Error(r.error.message); return r.data; };
 
+    let yaCargo = false;
+    const conTiempo = (pr, ms) => Promise.race([pr, new Promise((_, rej) => setTimeout(() => rej(new Error("la base de datos no responde")), ms))]);
     async function recargar() {
       try {
-        const ps = comprobar(await sb.from("perritos").select("id, datos"));
-        const cs = comprobar(await sb.from("sitio").select("datos").eq("id", "config").maybeSingle());
+        const ps = comprobar(await conTiempo(sb.from("perritos").select("id, datos"), 8000));
+        const cs = comprobar(await conTiempo(sb.from("sitio").select("datos").eq("id", "config").maybeSingle(), 8000));
+        yaCargo = true;
         const perritos = ps.map((r) => Object.assign({}, r.datos, { id: r.id }));
         if (perritos.length === 0 && !cs) {
           // Base aún vacía: se muestran los registros iniciales (sin guardar) hasta que el administrador los cargue.
@@ -137,7 +140,15 @@
           return;
         }
         alCambiar({ perritos, config: cs ? cs.datos : null, vacio: perritos.length === 0 && !cs });
-      } catch (e) { alCambiar(null, "No se pudo leer Supabase: " + e.message); }
+      } catch (e) {
+        console.warn("Supabase:", e);
+        if (!yaCargo) {
+          // Respaldo: si la base en línea no responde, se muestran las fichas incluidas en la web (sin guardar).
+          const ini = iniciales();
+          alCambiar({ perritos: ini.perritos, config: ini.config, vacio: false,
+            aviso: "Estamos mostrando las fichas guardadas en la web porque la base de datos en línea no respondió. Los perritos registrados recientemente pueden no aparecer por ahora." });
+        } else alCambiar(null, "No se pudo leer Supabase: " + e.message);
+      }
     }
     const a = {
       modo: "supabase",

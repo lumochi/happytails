@@ -645,6 +645,7 @@
   function aplicarDatos(nuevo, error) {
     if (error) { toast(error, "error"); return; }
     if (!nuevo) return;
+    if (nuevo.aviso) { const b = $("#modeBanner"); b.hidden = false; b.textContent = nuevo.aviso; }
     const ini = window.Almacenamiento.iniciales();
     D = { perritos: (nuevo.perritos || []).map((d) => Object.assign({ fotos: [], rasgos: [], medica: { vacunas: [] }, compatibilidad: {} }, d)), config: Object.assign({}, ini.config, nuevo.config || {}) };
     cargado = true;
