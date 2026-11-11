@@ -125,7 +125,17 @@
     let sesion = (await sb.auth.getSession()).data.session;
     const comprobar = (r) => { if (r.error) throw new Error(r.error.message); return r.data; };
 
-    let yaCargo = false;
+    let yaCargo = false, importando = false;
+    async function importarNuevos(nuevos, config, importados) {
+      importando = true;
+      try {
+        comprobar(await sb.from("perritos").upsert(nuevos.map((d) => ({ id: d.id, datos: copia(d), actualizado: new Date().toISOString() }))));
+        const datos = Object.assign({}, config, { importados: importados.concat(nuevos.map((d) => d.id)) });
+        comprobar(await sb.from("sitio").upsert({ id: "config", datos }));
+        await recargar();
+      } catch (e) { console.warn("No se pudieron guardar las fichas nuevas:", e); }
+      importando = false;
+    }
     const conTiempo = (pr, ms) => Promise.race([pr, new Promise((_, rej) => setTimeout(() => rej(new Error("la base de datos no responde")), ms))]);
     async function recargar() {
       try {
@@ -139,7 +149,13 @@
           alCambiar({ perritos: ini.perritos, config: ini.config, vacio: true });
           return;
         }
-        alCambiar({ perritos, config: cs ? cs.datos : null, vacio: perritos.length === 0 && !cs });
+        // Fichas nuevas incluidas en la web (agregadoWeb) que aún no están en la base: se muestran
+        // y, si hay una sesión de administrador, se guardan una sola vez en Supabase.
+        const importados = (cs && cs.datos && cs.datos.importados) || [];
+        const enBase = new Set(perritos.map((p) => p.id));
+        const nuevos = iniciales().perritos.filter((p) => p.agregadoWeb && !enBase.has(p.id) && !importados.includes(p.id));
+        alCambiar({ perritos: perritos.concat(nuevos), config: cs ? cs.datos : null, vacio: perritos.length === 0 && !cs });
+        if (nuevos.length && sesion && !importando) importarNuevos(nuevos, cs ? cs.datos : {}, importados);
       } catch (e) {
         console.warn("Supabase:", e);
         if (!yaCargo) {
@@ -156,7 +172,7 @@
       necesitaLogin: true,
       get sesion() { return !!sesion; },
       puedeAdministrar: () => true, // el panel muestra login; los permisos reales los aplica RLS en Supabase
-      async login(email, pass) { const r = await sb.auth.signInWithPassword({ email, password: pass }); if (r.error) throw new Error("No se pudo iniciar sesión: " + r.error.message); sesion = r.data.session; },
+      async login(email, pass) { const r = await sb.auth.signInWithPassword({ email, password: pass }); if (r.error) throw new Error("No se pudo iniciar sesión: " + r.error.message); sesion = r.data.session; await recargar(); },
       async logout() { await sb.auth.signOut(); sesion = null; },
       async guardarPerrito(d) { comprobar(await sb.from("perritos").upsert({ id: d.id, datos: copia(d), actualizado: new Date().toISOString() })); await recargar(); },
       async eliminarPerrito(id) { comprobar(await sb.from("perritos").delete().eq("id", id)); await recargar(); },

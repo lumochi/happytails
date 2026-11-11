@@ -1,4 +1,4 @@
-/* Registros iniciales extraídos de los 18 afiches del ZIP. Edítalos desde el panel de administración
+/* Registros iniciales extraídos de los 18 afiches del ZIP, más la camada de 5 cachorros fotografiada el 10/11. Edítalos desde el panel de administración
    o directamente aquí (ver README). Campos vacíos ("") = información pendiente de confirmar. */
 window.DATOS_INICIALES = {
  "perritos": [
@@ -745,6 +745,206 @@ window.DATOS_INICIALES = {
    "fuente": "Afiche «¡Busco hogar!» del ZIP perritos_albergue",
    "notas": [],
    "orden": 18
+  },
+  {
+   "id": "king-kong",
+   "nombre": "King Kong",
+   "especie": "Perro",
+   "sexo": "",
+   "pesoKg": null,
+   "tamano": "Pequeño",
+   "edad": "",
+   "etapa": "Cachorro",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "El más grande de la camada: negrito con una manchita blanca en el pecho. Como el dulce del norte, grande y lleno de cariño. Su foto es de la jornada de voluntariado del 10 de noviembre.",
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/king-kong.jpg",
+    "fotos/king-kong-2.jpg"
+   ],
+   "archivoOriginal": "",
+   "fuente": "Fotos de la jornada de voluntariado del 10/11/2026",
+   "notas": [],
+   "orden": 19,
+   "agregadoWeb": "2026-11-11"
+  },
+  {
+   "id": "mazamorra",
+   "nombre": "Mazamorra",
+   "especie": "Perro",
+   "sexo": "",
+   "pesoKg": null,
+   "tamano": "Pequeño",
+   "edad": "",
+   "etapa": "Cachorro",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "Negrito y pequeño, de la camada de cinco cachorros del albergue. Oscuro como la mazamorra morada. Su foto es de la jornada de voluntariado del 10 de noviembre.",
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/mazamorra.jpg",
+    "fotos/mazamorra-2.jpg"
+   ],
+   "archivoOriginal": "",
+   "fuente": "Fotos de la jornada de voluntariado del 10/11/2026",
+   "notas": [],
+   "orden": 20,
+   "agregadoWeb": "2026-11-11"
+  },
+  {
+   "id": "chocoteja",
+   "nombre": "Chocoteja",
+   "especie": "Perro",
+   "sexo": "",
+   "pesoKg": null,
+   "tamano": "Pequeño",
+   "edad": "",
+   "etapa": "Cachorro",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "Negro con patitas color caramelo y pecho blanco, como una chocoteja. Es parte de la camada de cinco cachorros. Su foto es de la jornada de voluntariado del 10 de noviembre.",
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/chocoteja.jpg",
+    "fotos/chocoteja-2.jpg"
+   ],
+   "archivoOriginal": "",
+   "fuente": "Fotos de la jornada de voluntariado del 10/11/2026",
+   "notas": [],
+   "orden": 21,
+   "agregadoWeb": "2026-11-11"
+  },
+  {
+   "id": "picaron",
+   "nombre": "Picarón",
+   "especie": "Perro",
+   "sexo": "",
+   "pesoKg": null,
+   "tamano": "Pequeño",
+   "edad": "",
+   "etapa": "Cachorro",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "Color miel con carita oscura, como un picarón recién hecho. Es parte de la camada de cinco cachorros. Su foto es de la jornada de voluntariado del 10 de noviembre.",
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/picaron.jpg",
+    "fotos/picaron-2.jpg"
+   ],
+   "archivoOriginal": "",
+   "fuente": "Fotos de la jornada de voluntariado del 10/11/2026",
+   "notas": [],
+   "orden": 22,
+   "agregadoWeb": "2026-11-11"
+  },
+  {
+   "id": "lucuma",
+   "nombre": "Lúcuma",
+   "especie": "Perro",
+   "sexo": "",
+   "pesoKg": null,
+   "tamano": "Pequeño",
+   "edad": "",
+   "etapa": "Cachorro",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "historia": "Color lúcuma con hocico oscuro. Es parte de la camada de cinco cachorros del albergue. Su foto es de la jornada de voluntariado del 10 de noviembre.",
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "fotos": [
+    "fotos/lucuma.jpg",
+    "fotos/lucuma-2.jpg"
+   ],
+   "archivoOriginal": "",
+   "fuente": "Fotos de la jornada de voluntariado del 10/11/2026",
+   "notas": [],
+   "orden": 23,
+   "agregadoWeb": "2026-11-11"
   }
  ],
  "config": {
