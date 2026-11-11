@@ -7,7 +7,7 @@
 <meta name="description" content="Adopta a un perrito rescatado: catálogo, fichas médicas y formulario de interés.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap">
-<link rel="stylesheet" href="css/estilos.css?v=98fdd400">
+<link rel="stylesheet" href="css/estilos.css?v=490e4dc8">
 </head>
 <body>
 <a class="sr-only" href="#perritos">Saltar al catálogo</a>
@@ -23,6 +23,7 @@
       <a href="#inicio">Inicio</a>
       <a href="#perritos">Adopta</a>
       <a href="#cita">Cita a ciegas</a>
+      <a href="#novedades">Novedades</a>
       <a href="#apadrina">Apadrina</a>
       <a href="#dona">Dona</a>
       <a href="#como-adoptar">Cómo adoptar</a>
@@ -72,6 +73,18 @@
         <p>Llegaron al albergue hace poco, todavía un poco asustados. Un hogar que los reciba ahora puede cambiarlo todo para ellos.</p>
       </div>
       <div class="featured-row" id="recienRow"></div>
+    </div>
+  </section>
+
+  <!-- NOVEDADES (publicaciones de la dueña desde el panel: pestaña "📸 Publicar") -->
+  <section class="section novedades" id="novedades" hidden>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-heart"/></svg>Novedades del albergue</span>
+        <h2>Lo que está pasando en el albergue</h2>
+        <p>Jornadas de voluntariado, nuevos rescates y adopciones felices, contados por quienes los cuidan todos los días.</p>
+      </div>
+      <div id="novedadesRoot"></div>
     </div>
   </section>
 
@@ -278,10 +291,11 @@
 <script src="js/config.js?v=7f3f3490"></script>
 <script src="data/perritos.js?v=41d72428"></script>
 <script src="js/almacenamiento.js?v=f00bf0ad"></script>
-<script src="js/app.js?v=6d5fc0db"></script>
+<script src="js/app.js?v=6f765771"></script>
 <script src="js/cita.js?v=bcd40d1d"></script>
 <script src="js/apadrina.js?v=8777aeba"></script>
 <script src="js/donaciones.js?v=0c07a9c5"></script>
 <script src="js/registrar.js?v=237d99e7"></script>
+<script src="js/publicaciones.js?v=f00d130d"></script>
 </body>
 </html>

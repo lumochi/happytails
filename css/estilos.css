@@ -647,3 +647,26 @@ textarea.reg-input { resize: vertical; min-height: 110px; }
 .reg-acciones { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
 @media (max-width: 860px) { .reg-wrap { grid-template-columns: 1fr; } .reg-preview { position: static; } .reg-preview .card { max-width: 320px; } }
 @media (max-width: 480px) { .reg-paso { grid-template-columns: 30px minmax(0, 1fr); gap: 10px; } .reg-num { width: 30px; height: 30px; font-size: 15px; } }
+
+/* ---------- Novedades (mini Instagram del albergue) ---------- */
+.novedades { background: var(--bg); }
+.pub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 20px; align-items: start; }
+.pub-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); display: grid; min-width: 0; }
+.pub-fotos { display: grid; gap: 3px; aspect-ratio: 4 / 3; background: var(--line); }
+.pub-fotos img { width: 100%; height: 100%; object-fit: cover; display: block; min-height: 0; }
+.pub-fotos.n2 { grid-template-columns: 1fr 1fr; }
+.pub-fotos.n3 { grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; } .pub-fotos.n3 img:first-child { grid-row: span 2; }
+.pub-fotos.n4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+.pub-cuerpo { padding: 16px 18px 18px; display: grid; gap: 10px; }
+.pub-cuerpo p { margin: 0; line-height: 1.55; overflow-wrap: anywhere; }
+.pub-meta { display: flex; gap: 10px; align-items: center; }
+.pub-meta strong { display: block; font-size: 14.5px; } .pub-meta small { color: var(--muted); font-size: 12.5px; }
+.pub-avatar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--peach-soft); font-size: 18px; flex: none; }
+.pub-pie { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 22px; }
+.pub-admin { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 20px; align-items: start; }
+.pub-admin .pub-mias { grid-column: 1 / -1; }
+.pub-lado { position: sticky; top: 12px; display: grid; gap: 10px; } .pub-lado h4 { margin: 0; }
+.pub-texto { width: 100%; min-height: 120px; resize: vertical; font: inherit; }
+.pub-btn { font-size: 17px; padding: 14px 26px; }
+.pub-sinfoto { width: 56px; height: 56px; display: grid; place-items: center; font-size: 26px; background: var(--peach-soft); border-radius: 10px; flex: none; }
+@media (max-width: 860px) { .pub-admin { grid-template-columns: 1fr; } .pub-lado { position: static; } }

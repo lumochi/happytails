@@ -393,7 +393,7 @@
   }
   function cerrarAdmin() {
     A.abierto = false; A.editando = null; A.borrador = null; $("#adminRoot").innerHTML = ""; document.body.style.overflow = "";
-    if (location.hash === "#admin" || location.hash === "#registrar") history.replaceState(null, "", location.pathname + location.search);
+    if (location.hash === "#admin" || location.hash === "#registrar" || location.hash === "#publicar") history.replaceState(null, "", location.pathname + location.search);
   }
   $("#adminOpen").addEventListener("click", abrirAdmin);
 
@@ -405,7 +405,7 @@
   function renderAdmin() {
     if (!A.abierto) return;
     const loginNecesario = store.necesitaLogin && !store.sesion;
-    const tabs = [["registrar", "🐶 Nuevo peludito"], ["perritos", "Perritos"], ["albergue", "Albergue y contacto"], ["stats", "Estadísticas"], ["donaciones", "Donaciones"], ["datos", "Datos y almacenamiento"]];
+    const tabs = [["registrar", "🐶 Nuevo peludito"], ["publicar", "📸 Publicar"], ["perritos", "Perritos"], ["albergue", "Albergue y contacto"], ["stats", "Estadísticas"], ["donaciones", "Donaciones"], ["datos", "Datos y almacenamiento"]];
     $("#adminRoot").innerHTML = `<div class="admin" role="dialog" aria-modal="true" aria-label="Panel de administración">
       <div class="admin-top"><div class="wrap"><span class="brand-mark" aria-hidden="true">${icon("i-paw")}</span><h2>Panel de administración</h2><span class="spacer"></span>
         ${store.necesitaLogin && store.sesion ? `<button class="btn btn-ghost btn-sm" data-a="logout">Cerrar sesión</button>` : ""}
@@ -421,6 +421,7 @@
   function vistaTab() {
     const aviso = `<div class="note ${store.modo === "local" ? "" : "sage"}">${icon("i-info")}<span><strong>${{ artifact: "Base de datos compartida", supabase: "Supabase", local: "Modo local (limitado)", lectura: "Solo lectura" }[store.modo]}:</strong> ${esc(store.descripcion)}</span></div>`;
     if (A.tab === "registrar") return window.HT_REG ? window.HT_REG.vista() : "";
+    if (A.tab === "publicar") return window.HT_PUB ? window.HT_PUB.vista() : "";
     if (A.tab === "perritos") return A.editando ? vistaEditor() : `<div style="display:grid;gap:16px">${aviso}${vistaLista()}</div>`;
     if (A.tab === "albergue") return vistaAlbergue();
     if (A.tab === "stats") return vistaStats();
@@ -659,9 +660,10 @@
     const h = location.hash.slice(1);
     if (h === "admin") abrirAdmin();
     else if (h === "registrar") { A.tab = "registrar"; abrirAdmin(); }
+    else if (h === "publicar") { A.tab = "publicar"; abrirAdmin(); }
     else if (h.startsWith("perrito-")) abrirFicha(h.slice(8));
   }
-  window.addEventListener("hashchange", () => { if (location.hash === "#admin") abrirAdmin(); else if (location.hash === "#registrar") { A.tab = "registrar"; abrirAdmin(); } });
+  window.addEventListener("hashchange", () => { if (location.hash === "#admin") abrirAdmin(); else if (location.hash === "#registrar") { A.tab = "registrar"; abrirAdmin(); } else if (location.hash === "#publicar") { A.tab = "publicar"; abrirAdmin(); } });
 
   orden = ls.get("patas.orden") || "orden"; $("#sort").value = ORDENES[orden] ? orden : "orden";
   window.Almacenamiento.crear(aplicarDatos).then((s) => {
