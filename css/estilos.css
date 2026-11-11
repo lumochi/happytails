@@ -670,3 +670,43 @@ textarea.reg-input { resize: vertical; min-height: 110px; }
 .pub-btn { font-size: 17px; padding: 14px 26px; }
 .pub-sinfoto { width: 56px; height: 56px; display: grid; place-items: center; font-size: 26px; background: var(--peach-soft); border-radius: 10px; flex: none; }
 @media (max-width: 860px) { .pub-admin { grid-template-columns: 1fr; } .pub-lado { position: static; } }
+
+/* ---------- Voluntariado y visitas ---------- */
+.voluntariado { background: var(--sage-soft); }
+.vol-tickets { display: flex; gap: 16px; margin-bottom: 36px; }
+.vol-tickets > .vol-ticket { flex: 1 1 0; } .vol-tickets > .vol-ticket.grande { flex: 1.45 1 0; }
+.vol-ticket { display: flex; background: var(--surface); border-radius: var(--radius); overflow: hidden; min-width: 0; border: 1px solid var(--line); }
+.vol-fecha { flex: none; width: 92px; display: grid; place-content: center; justify-items: center; gap: 2px; padding: 14px 8px; background: var(--sage-ink); color: var(--surface);
+  border-right: 2px dashed color-mix(in srgb, var(--surface) 55%, transparent); text-align: center; }
+.vol-mes { font-weight: 800; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+.vol-dia { font-family: var(--font-display); font-size: 44px; line-height: 1; font-weight: 700; }
+.vol-sem { font-size: 12.5px; opacity: .85; }
+.vol-ticket.grande .vol-fecha { width: 124px; } .vol-ticket.grande .vol-dia { font-size: 64px; }
+.vol-info { padding: 16px 18px; display: grid; gap: 6px; align-content: center; min-width: 0; }
+.vol-info h3 { font-size: 21px; margin: 0; } .vol-ticket.grande .vol-info h3 { font-size: 26px; }
+.vol-info p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.5; }
+.vol-tipo { justify-self: start; font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 999px; background: var(--sage-soft); color: var(--sage-ink); }
+.vol-tipo.t-adopcion { background: var(--peach-soft); color: var(--earth); }
+.vol-vacio { background: var(--surface); border-radius: var(--radius); padding: 22px; margin-bottom: 36px; color: var(--muted); }
+.vol-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 28px; align-items: start; }
+.vol-tareas h3, .vol-form h3, .vol-ok h3 { font-size: 26px; margin: 0 0 14px; }
+.vol-tareas ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.vol-tareas li { display: flex; gap: 14px; align-items: flex-start; }
+.vol-tareas li strong { display: block; font-size: 16px; color: var(--ink); }
+.vol-tareas li span:last-child { color: var(--muted); font-size: 14.5px; line-height: 1.45; }
+.vol-e { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: var(--surface); font-size: 22px; }
+.vol-nota { margin: 18px 0 0; font-size: 14px; color: var(--sage-ink); }
+.vol-form { background: var(--surface); border-radius: var(--radius); padding: clamp(18px, 3vw, 28px); display: grid; gap: 16px; }
+.vol-ok { display: grid; gap: 12px; justify-items: start; }
+.vol-visita { margin-top: 40px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px; align-items: center;
+  background: var(--peach-soft); border-radius: calc(var(--radius) * 1.4); padding: clamp(20px, 4vw, 36px); }
+.vol-visita h3 { font-size: clamp(24px, 3vw, 32px); margin: 0 0 10px; }
+.vol-visita p { margin: 0 0 14px; color: var(--muted); }
+.vol-visita dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 0; }
+.vol-visita dt { font-size: 13px; font-weight: 800; color: var(--earth); } .vol-visita dd { margin: 2px 0 0; font-weight: 600; }
+.vol-visita-form { background: var(--surface); border-radius: var(--radius); padding: 20px; display: grid; gap: 14px; }
+.vol-admin { display: grid; gap: 20px; }
+.vol-mini { flex: none; width: 52px; height: 52px; border-radius: 10px; display: grid; place-content: center; text-align: center; background: var(--sage-soft); color: var(--sage-ink); font-weight: 800; font-size: 20px; line-height: 1; }
+.vol-mini small { font-size: 11px; text-transform: uppercase; }
+.vol-nueva { display: grid; gap: 12px; border-top: 1px solid var(--line); padding-top: 16px; } .vol-nueva h4 { margin: 0; }
+@media (max-width: 960px) { .vol-tickets { flex-direction: column; } .vol-grid, .vol-visita { grid-template-columns: 1fr; } }

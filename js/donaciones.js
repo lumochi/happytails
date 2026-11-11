@@ -58,15 +58,15 @@
       <div class="don-ways">
         <article class="don-way"><span class="don-e">🥫</span><h3>Lleva comida o insumos</h3>
           <p>Alimento, mantas, artículos de limpieza o medicinas indicadas por el veterinario.</p>
-          <p class="don-k"><strong>Dónde:</strong> ${c.ubicacion ? esc(c.ubicacion) : PEND}</p>
-          <p class="don-k"><strong>Horario:</strong> ${c.horario ? esc(c.horario) : PEND}</p></article>
+          <p class="don-k"><strong>Dónde:</strong> ${esc(c.ubicacion || "San Martín de Porres, Lima")}</p>
+          <p class="don-k"><strong>Horario:</strong> ${esc(c.horario || "Coordina tu visita por WhatsApp")}</p></article>
         <article class="don-way"><span class="don-e">🤝</span><h3>Dona dinero en persona</h3>
           <p>Entrégalo directamente en el albergue. Te registramos para que sepas en qué se usó.</p>
           <p class="don-k">Coordina tu visita por WhatsApp${c.whatsapp ? `: <strong>+${esc(c.whatsapp)}</strong>` : ""}.</p></article>
         <article class="don-way"><span class="don-e">📱</span><h3>Dona en línea</h3>
           ${activos(d).length ? `<p>${activos(d).length > 1 ? "Elige el medio que prefieras:" : "Aporta en segundos:"}</p>
           <div class="don-medios">${activos(d).map((m) => medioHTML(m, d)).join("")}</div>`
-            : `<p class="don-k">${PEND}: el albergue aún no registra su Yape, Plin u otro medio de pago en línea.</p>`}</article>
+            : `<p>Pide el Yape o Plin del albergue por WhatsApp y te lo enviamos al momento.</p>${c.whatsapp ? `<a class="btn btn-soft btn-sm" href="https://wa.me/${esc(String(c.whatsapp).replace(/\D/g, ""))}?text=${encodeURIComponent("¡Hola! Quiero hacer una donación al albergue 💛 ¿Me pasan su Yape o Plin?")}" target="_blank" rel="noopener">Pedir el Yape por WhatsApp</a>` : ""}`}</article>
       </div>
       ${necesidades.length ? `<div class="don-needs"><h3>Lo que más necesitamos</h3><div class="tags">${necesidades.map((n) => { const urg = /^!|urgente/i.test(n); return `<span class="tag ${urg ? "warn" : "sage"}">${urg ? "⚠️ " : ""}${esc(n.replace(/^!\s*/, ""))}</span>`; }).join("")}</div></div>` : ""}
       <div class="don-grid">

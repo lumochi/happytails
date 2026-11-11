@@ -61,7 +61,7 @@
       <div class="card-body">
         <div class="card-title"><h3>${esc(d.nombre)}</h3><span class="sex">${esc(d.sexo || "")}</span></div>
         <div class="card-meta">
-          <span>${icon("i-cake")}${d.edad ? esc(d.edad) : d.etapa ? esc(d.etapa === "Senior" ? "Adulto mayor" : d.etapa) : '<span class="pending">Edad por confirmar</span>'}</span>
+          <span>${icon("i-cake")}${d.edad ? esc(d.edad) : d.etapa ? esc(d.etapa === "Senior" ? "Adulto mayor" : d.etapa) : ""}</span>
           <span>${iconS("i-ruler")}${pend(d.tamano, "Tamaño por confirmar")}</span>
           ${d.pesoKg ? `<span>${iconS("i-weight")}${esc(d.pesoKg)} kg</span>` : ""}
           ${d.raza ? `<span>${esc(d.raza)}</span>` : ""}
@@ -213,12 +213,14 @@
     $("#stats").innerHTML = stats.map((s) => {
       let v = s.valor, nota = "";
       if (s.auto && s.id in auto) { v = auto[s.id]; nota = "Calculado automáticamente del catálogo"; }
+      if (s.id === "adopciones" && (v === null || v === undefined || v === "") && auto.adoptados > 0) { v = auto.adoptados; nota = "Perritos marcados como adoptados en la página"; }
       const p = v === null || v === undefined || v === "";
-      if (p) hayPend = true;
+      if (p) return "";
       return `<div class="stat"><span class="stat-value ${p ? "is-pending" : ""}">${p ? "—" : esc(v)}</span><span class="stat-label">${esc(s.etiqueta)}</span>
         <span class="stat-note">${p ? '<span class="tag warn">Valor provisional · pendiente de confirmar</span>' : esc(nota || "Dato registrado por el albergue")}</span></div>`;
     }).join("");
-    $("#impactNote").textContent = hayPend ? "Las cifras marcadas como pendientes aún no han sido confirmadas por el albergue y se completan desde el panel de administración." : "";
+    $("#impactNote").textContent = "";
+    $("#impacto").hidden = $("#stats").children.length < 2;
 
     // Sobre nosotros
     $("#aboutMosaic").innerHTML = D.perritos.slice(0, 6).map((d) => `<img src="${esc(fotoPrincipal(d))}" alt="" loading="lazy">`).join("");
@@ -226,8 +228,9 @@
     const fila = (ic, k, v, txt) => `<li>${iconS(ic)}<span style="min-width:0"><span class="k">${k}</span><span class="v">${v ? esc(v) : `<span class="pending">${txt || "Pendiente de configurar"}</span>`}</span></span></li>`;
     $("#contactList").innerHTML =
       `<li>${iconS("i-chat")}<span style="min-width:0"><span class="k">WhatsApp</span><span class="v">${wa ? `<a href="https://wa.me/${wa}" target="_blank" rel="noopener">+${esc(wa)}</a>` : '<span class="pending">Número pendiente de configurar</span>'}</span></span></li>` +
-      `<li>${iconS("i-camera")}<span style="min-width:0"><span class="k">Instagram / redes</span><span class="v">${c.instagram ? (/^https?:\/\//.test(c.instagram) ? `<a href="${esc(c.instagram)}" target="_blank" rel="noopener">${esc(c.instagram)}</a>` : esc(c.instagram)) : '<span class="pending">Pendiente de configurar</span>'}</span></span></li>` +
-      fila("i-mail", "Correo", c.correo) + fila("i-pin", "Ubicación", c.ubicacion) + fila("i-clock", "Horario de visitas", c.horario);
+      (() => { const ig = c.instagram || "@happytails_peru", url = /^https?:\/\//.test(ig) ? ig : "https://www.instagram.com/" + ig.replace(/^@/, "");
+        return `<li>${iconS("i-camera")}<span style="min-width:0"><span class="k">Instagram</span><span class="v"><a href="${esc(url)}" target="_blank" rel="noopener">${esc(/^https?:/.test(ig) ? ig.replace(/^https?:\/\/(www\.)?instagram\.com\//, "@").replace(/\/$/, "") : ig)}</a></span></span></li>`; })() +
+      (c.correo ? fila("i-mail", "Correo", c.correo) : "") + fila("i-pin", "Ubicación", c.ubicacion || "San Martín de Porres, Lima") + fila("i-clock", "Visitas", c.horario || "Coordina tu visita por WhatsApp");
     renderWaNota();
   }
 
@@ -253,9 +256,9 @@
     ];
   }
   function renderFiltros() {
-    $("#filters").innerHTML = opcionesFiltro().map((g) => `<div class="filter-group" role="group" aria-label="${esc(g.t)}"><span>${esc(g.t)}</span>
+    $("#filters").innerHTML = opcionesFiltro().filter((g) => g.ops.filter(([v]) => v !== "").length > 0).map((g) => `<div class="filter-group" role="group" aria-label="${esc(g.t)}"><span>${esc(g.t)}</span>
       <div class="chips">${g.ops.map(([v, l]) => `<button type="button" class="chip" data-f="${g.k}" data-v="${esc(v)}" aria-pressed="${filtros[g.k].has(v)}">${esc(l)}</button>`).join("")}</div>
-      ${g.nota ? `<span class="filter-note">${esc(g.nota)}</span>` : ""}</div>`).join("");
+      </div>`).join("");
   }
   function coincide(d) {
     if (busqueda && !norm(d.nombre).includes(norm(busqueda))) return false;
@@ -405,7 +408,7 @@
   function renderAdmin() {
     if (!A.abierto) return;
     const loginNecesario = store.necesitaLogin && !store.sesion;
-    const tabs = [["registrar", "🐶 Nuevo peludito"], ["publicar", "📸 Publicar"], ["perritos", "Perritos"], ["albergue", "Albergue y contacto"], ["stats", "Estadísticas"], ["donaciones", "Donaciones"], ["datos", "Datos y almacenamiento"]];
+    const tabs = [["registrar", "🐶 Nuevo peludito"], ["publicar", "📸 Publicar"], ["voluntariado", "🙋 Voluntariado"], ["perritos", "Perritos"], ["albergue", "Albergue y contacto"], ["stats", "Estadísticas"], ["donaciones", "Donaciones"], ["datos", "Datos y almacenamiento"]];
     $("#adminRoot").innerHTML = `<div class="admin" role="dialog" aria-modal="true" aria-label="Panel de administración">
       <div class="admin-top"><div class="wrap"><span class="brand-mark" aria-hidden="true">${icon("i-paw")}</span><h2>Panel de administración</h2><span class="spacer"></span>
         ${store.necesitaLogin && store.sesion ? `<button class="btn btn-ghost btn-sm" data-a="logout">Cerrar sesión</button>` : ""}
@@ -422,6 +425,7 @@
     const aviso = `<div class="note ${store.modo === "local" ? "" : "sage"}">${icon("i-info")}<span><strong>${{ artifact: "Base de datos compartida", supabase: "Supabase", local: "Modo local (limitado)", lectura: "Solo lectura" }[store.modo]}:</strong> ${esc(store.descripcion)}</span></div>`;
     if (A.tab === "registrar") return window.HT_REG ? window.HT_REG.vista() : "";
     if (A.tab === "publicar") return window.HT_PUB ? window.HT_PUB.vista() : "";
+    if (A.tab === "voluntariado") return window.HT_VOL ? window.HT_VOL.vistaAdmin() : "";
     if (A.tab === "perritos") return A.editando ? vistaEditor() : `<div style="display:grid;gap:16px">${aviso}${vistaLista()}</div>`;
     if (A.tab === "albergue") return vistaAlbergue();
     if (A.tab === "stats") return vistaStats();

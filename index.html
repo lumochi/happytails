@@ -7,7 +7,7 @@
 <meta name="description" content="Adopta a un perrito rescatado: catálogo, fichas médicas y formulario de interés.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap">
-<link rel="stylesheet" href="css/estilos.css?v=490e4dc8">
+<link rel="stylesheet" href="css/estilos.css?v=fa9db7bf">
 </head>
 <body>
 <a class="sr-only" href="#perritos">Saltar al catálogo</a>
@@ -20,9 +20,9 @@
       <span style="min-width:0"><span class="brand-name" data-bind="nombre">Happy Tails</span><span class="brand-sub" data-bind="lema"></span></span>
     </a>
     <nav class="nav" id="nav" aria-label="Principal">
-      <a href="#inicio">Inicio</a>
       <a href="#perritos">Adopta</a>
       <a href="#cita">Cita a ciegas</a>
+      <a href="#voluntariado">Voluntariado</a>
       <a href="#novedades">Novedades</a>
       <a href="#apadrina">Apadrina</a>
       <a href="#dona">Dona</a>
@@ -175,6 +175,18 @@
   </section>
 
   <!-- APADRINA -->
+  <!-- VOLUNTARIADO Y VISITAS (fechas y visitas se editan en el panel: pestaña "🙋 Voluntariado") -->
+  <section class="section voluntariado" id="voluntariado">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-paw"/></svg>Voluntariado</span>
+        <h2>Una mañana tuya les cambia la semana</h2>
+        <p>Cuidar a más de 20 perritos es trabajo de todos los días. Cada jornada deja los espacios limpios, a los perritos bañados y sus fotos listas para que encuentren familia.</p>
+      </div>
+      <div id="voluntarioRoot"></div>
+    </div>
+  </section>
+
   <section class="section apadrina" id="apadrina">
     <div class="wrap">
       <div class="section-head">
@@ -290,12 +302,13 @@
 
 <script src="js/config.js?v=7f3f3490"></script>
 <script src="data/perritos.js?v=41d72428"></script>
-<script src="js/almacenamiento.js?v=f00bf0ad"></script>
-<script src="js/app.js?v=6f765771"></script>
+<script src="js/almacenamiento.js?v=097efe96"></script>
+<script src="js/app.js?v=9f03e894"></script>
 <script src="js/cita.js?v=bcd40d1d"></script>
 <script src="js/apadrina.js?v=8777aeba"></script>
-<script src="js/donaciones.js?v=0c07a9c5"></script>
+<script src="js/donaciones.js?v=c70fc758"></script>
 <script src="js/registrar.js?v=237d99e7"></script>
+<script src="js/voluntarios.js?v=777793dc"></script>
 <script src="js/publicaciones.js?v=f00d130d"></script>
 </body>
 </html>
