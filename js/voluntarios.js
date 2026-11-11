@@ -28,7 +28,7 @@
   /* ---- Configuración con valores de partida (solo si el albergue aún no la ha guardado) ---- */
   const DEF_JORNADAS = [
     { id: "j15", fecha: "2026-11-15", hora: "9:00 a. m.", tipo: "voluntariado", titulo: "Jornada en el albergue", detalle: "Limpieza, baños y fotos de los perritos adultos." },
-    { id: "j22", fecha: "2026-11-22", hora: "9:00 a. m.", tipo: "voluntariado", titulo: "Jornada en el albergue", detalle: "Te confirmamos las tareas por WhatsApp unos días antes." },
+    { id: "j22", fecha: "2026-11-22", hora: "9:00 a. m.", tipo: "adopcion", titulo: "Evento de adopción + voluntariado", detalle: "Conoce a los perritos en persona o ayuda a organizar el evento. Te confirmamos las tareas por WhatsApp." },
   ];
   const DEF_VISITAS = { activo: true, aporte: "Un aporte voluntario o una bolsa de comida", horario: "Fines de semana, coordinando por WhatsApp" };
   const cfg = () => (window.HT ? window.HT.cfg() : {}) || {};
