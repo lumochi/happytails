@@ -54,7 +54,7 @@
 
   function Tarjeta(d) {
     const rasgos = (d.rasgos || []).slice(0, 3).map((r) => `<span class="tag">${esc(cap(r))}</span>`).join("");
-    const noPerro = d.especie && d.especie !== "Perro" ? `<span class="tag warn">${esc(d.especie)}</span>` : "";
+    const noPerro = d.especie && d.especie !== "Perro" ? `<span class="tag${d.especie === "Gato" ? "" : " warn"}">${d.especie === "Gato" ? "🐈 Gato" : esc(d.especie)}</span>` : "";
     return `<article class="card ${d.estado === "adoptado" ? "is-adopted" : ""}">
       <div class="card-photo"><img src="${esc(fotoPrincipal(d))}" alt="Foto de ${esc(d.nombre)}" loading="lazy" width="640" height="640">${badgeEstado(d.estado)}
         ${d.destacado ? `<span class="fav" title="Destacado">${icon("i-heart")}</span>` : ""}${d.apadrinado ? `<span class="padrino-badge">💛 Apadrinado</span>` : ""}${esRecien(d) ? `<span class="recien-badge">🌱 Recién llegad${articulo(d)}</span>` : ""}</div>
@@ -125,7 +125,7 @@
       </div>
       <div class="dossier-body">
         <div class="dossier-head">${badgeEstado(d.estado)}<h2 id="modalTitle">${esc(d.nombre)}</h2>
-          ${d.especie && d.especie !== "Perro" ? `<div class="note">${icon("i-info")}<span>Especie registrada: ${esc(d.especie)}.</span></div>` : ""}</div>
+          ${d.especie && d.especie !== "Perro" && d.especie !== "Gato" ? `<div class="note">${icon("i-info")}<span>Especie registrada: ${esc(d.especie)}.</span></div>` : ""}</div>
         <div class="facts">
           <div class="fact"><span class="k">Edad</span><span class="v ${d.edad ? "" : "pending"}">${d.edad ? esc(d.edad) : PEND}</span></div>
           <div class="fact"><span class="k">Sexo</span><span class="v">${pend(d.sexo)}</span></div>

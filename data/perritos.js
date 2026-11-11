@@ -1,4 +1,4 @@
-/* Registros iniciales extraídos de los 18 afiches del ZIP, más la camada de 5 cachorros fotografiada el 10/11. Edítalos desde el panel de administración
+/* Registros iniciales extraídos de los 18 afiches del ZIP, más la camada de 5 cachorros y 6 gatos fotografiados el 10/11. Edítalos desde el panel de administración
    o directamente aquí (ver README). Campos vacíos ("") = información pendiente de confirmar. */
 window.DATOS_INICIALES = {
  "perritos": [
@@ -763,7 +763,7 @@ window.DATOS_INICIALES = {
     "perros": "",
     "gatos": ""
    },
-   "historia": "El más grande de la camada: negrito con una manchita blanca en el pecho. Como el dulce del norte, grande y lleno de cariño. Su foto es de la jornada de voluntariado del 10 de noviembre.",
+   "historia": "El más grande de la camada: todo negrito, de orejas caídas y mirada curiosa. Como el dulce del norte, grande y lleno de cariño. Su foto es de la jornada de voluntariado del 10 de noviembre.",
    "cuidados": "",
    "saludAfiche": "",
    "medica": {
@@ -843,7 +843,7 @@ window.DATOS_INICIALES = {
     "perros": "",
     "gatos": ""
    },
-   "historia": "Negro con patitas color caramelo y pecho blanco, como una chocoteja. Es parte de la camada de cinco cachorros. Su foto es de la jornada de voluntariado del 10 de noviembre.",
+   "historia": "Negro con cejas y patitas color caramelo y el pecho blanco, como una chocoteja. Es parte de la camada de cinco cachorros. Su foto es de la jornada de voluntariado del 10 de noviembre.",
    "cuidados": "",
    "saludAfiche": "",
    "medica": {
@@ -907,14 +907,9 @@ window.DATOS_INICIALES = {
    "agregadoWeb": "2026-11-11"
   },
   {
-   "id": "lucuma",
-   "nombre": "Lúcuma",
-   "especie": "Perro",
    "sexo": "",
    "pesoKg": null,
-   "tamano": "Pequeño",
    "edad": "",
-   "etapa": "Cachorro",
    "raza": "",
    "energia": "",
    "rasgos": [],
@@ -923,7 +918,6 @@ window.DATOS_INICIALES = {
     "perros": "",
     "gatos": ""
    },
-   "historia": "Color lúcuma con hocico oscuro. Es parte de la camada de cinco cachorros del albergue. Su foto es de la jornada de voluntariado del 10 de noviembre.",
    "cuidados": "",
    "saludAfiche": "",
    "medica": {
@@ -936,15 +930,261 @@ window.DATOS_INICIALES = {
    },
    "estado": "disponible",
    "destacado": false,
-   "fotos": [
-    "fotos/lucuma.jpg",
-    "fotos/lucuma-2.jpg"
-   ],
    "archivoOriginal": "",
    "fuente": "Fotos de la jornada de voluntariado del 10/11/2026",
    "notas": [],
-   "orden": 23,
-   "agregadoWeb": "2026-11-11"
+   "agregadoWeb": "2026-11-11",
+   "id": "frejolito",
+   "nombre": "Frejolito",
+   "especie": "Perro",
+   "tamano": "Pequeño",
+   "etapa": "Cachorro",
+   "historia": "Negrito, con las patitas color caramelo y una manchita blanca en el pecho. Oscuro como el frejol colado. Es parte de la camada de cinco cachorros. Su foto es de la jornada de voluntariado del 10 de noviembre.",
+   "fotos": [
+    "fotos/frejolito.jpg",
+    "fotos/frejolito-2.jpg"
+   ],
+   "orden": 23
+  },
+  {
+   "sexo": "",
+   "pesoKg": null,
+   "edad": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "archivoOriginal": "",
+   "fuente": "Fotos de la jornada de voluntariado del 10/11/2026",
+   "notas": [],
+   "agregadoWeb": "2026-11-11",
+   "id": "chancaca",
+   "nombre": "Chancaca",
+   "especie": "Gato",
+   "tamano": "Pequeño",
+   "etapa": "Cachorro",
+   "historia": "Carey: mezcla de negro y caramelo, como la chancaca. Tiene unos ojos verdes enormes. Su foto es de la jornada de voluntariado del 10 de noviembre.",
+   "fotos": [
+    "fotos/chancaca.jpg",
+    "fotos/chancaca-2.jpg"
+   ],
+   "orden": 24
+  },
+  {
+   "sexo": "",
+   "pesoKg": null,
+   "edad": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "archivoOriginal": "",
+   "fuente": "Fotos de la jornada de voluntariado del 10/11/2026",
+   "notas": [],
+   "agregadoWeb": "2026-11-11",
+   "id": "suspiro",
+   "nombre": "Suspiro",
+   "especie": "Gato",
+   "tamano": "Pequeño",
+   "etapa": "Cachorro",
+   "historia": "Gatito color crema con la carita y las orejas más oscuras, suave como un suspiro a la limeña. Su foto es de la jornada de voluntariado del 10 de noviembre.",
+   "fotos": [
+    "fotos/suspiro.jpg",
+    "fotos/suspiro-2.jpg"
+   ],
+   "orden": 25
+  },
+  {
+   "sexo": "",
+   "pesoKg": null,
+   "edad": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "archivoOriginal": "",
+   "fuente": "Fotos de la jornada de voluntariado del 10/11/2026",
+   "notas": [],
+   "agregadoWeb": "2026-11-11",
+   "id": "merengue",
+   "nombre": "Merengue",
+   "especie": "Gato",
+   "tamano": "Mediano",
+   "etapa": "Adulto",
+   "historia": "Blanquito y de pelo largo, como el merengue. Le gusta descansar tranquilo en su caja. Su foto es de la jornada de voluntariado del 10 de noviembre.",
+   "fotos": [
+    "fotos/merengue.jpg",
+    "fotos/merengue-2.jpg"
+   ],
+   "orden": 26
+  },
+  {
+   "sexo": "",
+   "pesoKg": null,
+   "edad": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "archivoOriginal": "",
+   "fuente": "Fotos de la jornada de voluntariado del 10/11/2026",
+   "notas": [],
+   "agregadoWeb": "2026-11-11",
+   "id": "alfajor",
+   "nombre": "Alfajor",
+   "especie": "Gato",
+   "tamano": "Mediano",
+   "etapa": "Adulto",
+   "historia": "Atigrado con pecho blanco y grandes ojos verdes, por capas como un alfajor. Su foto es de la jornada de voluntariado del 10 de noviembre.",
+   "fotos": [
+    "fotos/alfajor.jpg",
+    "fotos/alfajor-2.jpg"
+   ],
+   "orden": 27
+  },
+  {
+   "sexo": "",
+   "pesoKg": null,
+   "edad": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "archivoOriginal": "",
+   "fuente": "Fotos de la jornada de voluntariado del 10/11/2026",
+   "notas": [],
+   "agregadoWeb": "2026-11-11",
+   "id": "plomito",
+   "nombre": "Plomito",
+   "especie": "Gato",
+   "tamano": "Mediano",
+   "etapa": "Adulto",
+   "historia": "Gato atigrado gris, de mirada serena. Su foto es de la jornada de voluntariado del 10 de noviembre.",
+   "fotos": [
+    "fotos/plomito.jpg",
+    "fotos/plomito-2.jpg"
+   ],
+   "orden": 28
+  },
+  {
+   "sexo": "",
+   "pesoKg": null,
+   "edad": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "archivoOriginal": "",
+   "fuente": "Fotos de la jornada de voluntariado del 10/11/2026",
+   "notas": [],
+   "agregadoWeb": "2026-11-11",
+   "id": "turron",
+   "nombre": "Turrón",
+   "especie": "Gato",
+   "tamano": "Mediano",
+   "etapa": "Adulto",
+   "historia": "Blanco con manchas marrones, de colores como el turrón de Doña Pepa. Su foto es de la jornada de voluntariado del 10 de noviembre.",
+   "fotos": [
+    "fotos/turron.jpg",
+    "fotos/turron-2.jpg"
+   ],
+   "orden": 29
   }
  ],
  "config": {
