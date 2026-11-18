@@ -1,4 +1,4 @@
-/* Registros iniciales extraídos de los 18 afiches del ZIP, más la camada de 5 cachorros y 6 gatos fotografiados el 10/11. Edítalos desde el panel de administración
+/* Registros iniciales extraídos de los 18 afiches del ZIP, más la camada de 5 cachorros y 6 gatos fotografiados el 10/11 y 7 animales de la visita del 18/11. Edítalos desde el panel de administración
    o directamente aquí (ver README). Campos vacíos ("") = información pendiente de confirmar. */
 window.DATOS_INICIALES = {
  "perritos": [
@@ -1185,6 +1185,279 @@ window.DATOS_INICIALES = {
     "fotos/turron-2.jpg"
    ],
    "orden": 29
+  },
+  {
+   "sexo": "",
+   "pesoKg": null,
+   "edad": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "archivoOriginal": "",
+   "fuente": "Fotos de la visita al albergue del 18/11/2026",
+   "notas": [],
+   "agregadoWeb": "2026-11-18",
+   "id": "tejita",
+   "nombre": "Tejita",
+   "especie": "Gato",
+   "tamano": "Mediano",
+   "etapa": "Adulto",
+   "historia": "Blanco y negro como una teja de chocolate rellena: pechito y patitas blancas, manchita negra en la barbilla y ojos verdes. Su foto es de la visita al albergue del 18 de noviembre.",
+   "fotos": [
+    "fotos/tejita.jpg"
+   ],
+   "orden": 30
+  },
+  {
+   "sexo": "",
+   "pesoKg": null,
+   "edad": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "archivoOriginal": "",
+   "fuente": "Fotos de la visita al albergue del 18/11/2026",
+   "notas": [],
+   "agregadoWeb": "2026-11-18",
+   "id": "mazapan",
+   "nombre": "Mazapán",
+   "especie": "Gato",
+   "tamano": "Mediano",
+   "etapa": "Adulto",
+   "historia": "Gatita tricolor (carey atigrada) con pecho y patitas blancas y grandes ojos verdes; colorida como un mazapán. Su foto es de la visita al albergue del 18 de noviembre.",
+   "fotos": [
+    "fotos/mazapan.jpg"
+   ],
+   "orden": 31
+  },
+  {
+   "sexo": "",
+   "pesoKg": null,
+   "edad": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "archivoOriginal": "",
+   "fuente": "Fotos de la visita al albergue del 18/11/2026",
+   "notas": [],
+   "agregadoWeb": "2026-11-18",
+   "id": "cocada",
+   "nombre": "Cocada",
+   "especie": "Gato",
+   "tamano": "Mediano",
+   "etapa": "Adulto",
+   "historia": "Blanco con manchas atigradas en la cabeza y el lomo, nariz rosada y ojos claros; dulce como una cocada. Su foto es de la visita al albergue del 18 de noviembre.",
+   "fotos": [
+    "fotos/cocada.jpg"
+   ],
+   "orden": 32
+  },
+  {
+   "sexo": "",
+   "pesoKg": null,
+   "edad": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "archivoOriginal": "",
+   "fuente": "Fotos de la visita al albergue del 18/11/2026",
+   "notas": [],
+   "agregadoWeb": "2026-11-18",
+   "id": "manjar",
+   "nombre": "Manjar",
+   "especie": "Gato",
+   "tamano": "Mediano",
+   "etapa": "Adulto",
+   "historia": "De pelo largo color crema y cola esponjosa más oscura; suave como el manjar blanco. Su foto es de la visita al albergue del 18 de noviembre.",
+   "fotos": [
+    "fotos/manjar.jpg"
+   ],
+   "orden": 33
+  },
+  {
+   "sexo": "",
+   "pesoKg": null,
+   "edad": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "archivoOriginal": "",
+   "fuente": "Fotos de la visita al albergue del 18/11/2026",
+   "notas": [],
+   "agregadoWeb": "2026-11-18",
+   "id": "bizcocho",
+   "nombre": "Bizcocho",
+   "especie": "Gato",
+   "tamano": "Mediano",
+   "etapa": "Joven",
+   "historia": "Gris atigrado de ojos verdes, tranquilo y muy fotogénico. Su foto es de la visita al albergue del 18 de noviembre.",
+   "fotos": [
+    "fotos/bizcocho.jpg"
+   ],
+   "orden": 34
+  },
+  {
+   "sexo": "",
+   "pesoKg": null,
+   "edad": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "archivoOriginal": "",
+   "fuente": "Fotos de la visita al albergue del 18/11/2026",
+   "notas": [],
+   "agregadoWeb": "2026-11-18",
+   "id": "cafe",
+   "nombre": "Café",
+   "especie": "Perro",
+   "tamano": "Pequeño",
+   "etapa": "Cachorro",
+   "historia": "Cachorro negrito de orejas caídas con las patitas delanteras blancas. Su foto es de la visita al albergue del 18 de noviembre.",
+   "fotos": [
+    "fotos/cafe.jpg"
+   ],
+   "orden": 35
+  },
+  {
+   "sexo": "",
+   "pesoKg": null,
+   "edad": "",
+   "raza": "",
+   "energia": "",
+   "rasgos": [],
+   "compatibilidad": {
+    "ninos": "",
+    "perros": "",
+    "gatos": ""
+   },
+   "cuidados": "",
+   "saludAfiche": "",
+   "medica": {
+    "ultimaVacuna": "",
+    "vacunas": [],
+    "desparasitacion": "",
+    "esterilizacion": "",
+    "condiciones": "",
+    "proximoControl": ""
+   },
+   "estado": "disponible",
+   "destacado": false,
+   "archivoOriginal": "",
+   "fuente": "Fotos de la visita al albergue del 18/11/2026",
+   "notas": [],
+   "agregadoWeb": "2026-11-18",
+   "id": "canchita",
+   "nombre": "Canchita",
+   "especie": "Perro",
+   "tamano": "Pequeño",
+   "etapa": "Cachorro",
+   "historia": "Cachorro color canela con la carita negra, orejas grandes y la lengüita afuera. Su foto es de la visita al albergue del 18 de noviembre.",
+   "fotos": [
+    "fotos/canchita.jpg"
+   ],
+   "orden": 36
   }
  ],
  "config": {
